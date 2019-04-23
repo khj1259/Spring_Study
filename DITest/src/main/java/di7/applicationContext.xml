@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+<!-- annotation 설정을 하려면 context 항목을 선택해야 함 -->	
+
+	<context:component-scan base-package="di7"></context:component-scan>
+	<!-- annotation을 이용해서 객체를 빈으로 등록하는 방법
+		 클래스 정의 소스위에 @Component annotation을 지정하면, 해당 클래스를 읽어서 빈으로 준비 -->
+</beans>
