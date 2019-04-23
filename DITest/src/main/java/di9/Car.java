@@ -22,7 +22,7 @@ public class Car {
 	}
 	
 	public void drive() {
-		System.out.println(tire.getName()+"로 굴러가는 자동차 di3");
+		System.out.println(tire.getName()+"로 굴러가는 자동차 di9");
 	}
 }
 // 의존성 을 걷어내려면
