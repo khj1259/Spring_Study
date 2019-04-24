@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 
+	xml 문법을 정의 : 다음에 나올 태그들에 대한 정보를 정의해 놓음 
+	DTD 
+	스키마로 로케이션 지정 
+-->
+<!-- config.xml Mybatis 기본적인 설정파일 - 별칭정보, DB정보, 매퍼를 정의 -->
+<configuration>
+	<typeAliases>
+	<!-- 별칭정보 지정, xml에서는 import를 할 수 없어, 클래스의 풀경로를 사용해야 하는데, 쉽게하려고 Alias를 지정함 -->
+	<!-- 다른 xml파일에서도 같이 공유한다 -->
+		<typeAlias type="com.vo.Car" alias="Car"/>
+	</typeAliases>
+	
+	<!-- db의 정보를 관리하는 태그 : environments는 자식으로 environment를 1개만 지정할 수 있다
+		전략적으로 여러개를 environment 자식태그로 넣을 수 있도록 하는 이유 : 상황에 따라 수정을 최소로 하여 선택할 수 있도록 함
+		default로 지정해준 id의 environment가 지정되는 구조임 (여러개중에 default로 사용할거 하나만 선택하면 됨) -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" /><!-- 수동커밋 -->
+<!-- 		<transactionManager type="MANAGED" />  오토커밋 -->
+
+<!-- 		CONNECTING MYSQL -->
+			<dataSource type="POOLED"><!-- 커넥션 풀을 사용, property 추가적인 속성을 더 지정할 수 있다-->
+<!-- 		<dataSource type="UNPOOLED"> 커넥션 풀을 사용하지 않음, property 4가지의 필수정보가 필요하다 -->
+				<property name="driver" value="com.mysql.cj.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC" />
+				<property name="username" value="root" />
+				<property name="password" value="tiger" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/mybatis/mapper/PersonMapper.xml" /> <!-- (sql문을 작성한)매퍼파일 -->
+	</mappers>
+</configuration>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.dao.CarDAO"> <!-- 매핑할 인터페이스 파일을 지정 -->
+	<select id="selectAll" resultType="Car">
+		SELECT * FROM cars
+	</select>
+
+	<select id="selectById" parameterType="int" resultType="Car">
+		SELECT * FROM cars WHERE id=#{id}
+	</select>
+	 
+	<select id="selectByName" parameterType="String" resultType="Car">
+		SELECT * FROM cars WHERE name LIKE CONCAT('%',#{name},'%')
+	</select>
+	
+	<select id="selectByPrice" parameterType="int" resultType="Car">
+		SELECT * FROM cars WHERE price >= #{price}
+	</select>
+
+	<insert id="insert" parameterType="Car" 
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO cars (name, manufacturer, price) VALUES (#{name}, #{manufacturer}, #{price})	
+	</insert>
+	
+	<update id="update" parameterType="Car">
+		UPDATE cars SET name=#{name}, manufacturer=#{manufacturer}, price=#{price}  WHERE id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM cars WHERE id=#{id}
+	</delete>
+</mapper>
+
+
+
+
+
+
