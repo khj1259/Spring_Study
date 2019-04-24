@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- 
+	PersonMapper.xml 파일에 SQL 쿼리문을 작성한다
+	짝꿍 자바코드와 매핑한다.
+ -->
+<mapper namespace="com.dao.PersonDAO"> <!-- 매핑할 인터페이스 파일을 지정 -->
+<!-- type Person 객체를 사용해서 리턴, peroperty :클래서의 변수명, column :테이블의 컬럼명 -->
+	<resultMap type="Person" id="result">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+	</resultMap>
+<!-- resultMap = "result" 리턴값을 처리할 방법을 의미 -->
+<!-- resultType = "Person" VO타입, 리턴값을 처리할 방법으로 객체에 알아서 넣어줌, resultMap을 정의안해도 됨
+				  peroperty :클래서의 변수명, column :테이블의 컬럼명-->
+	<select id="selectAll" resultMap="result">
+		SELECT * FROM persons
+	</select>
+
+	<select id="selectById" parameterType="int" resultMap="result">
+		SELECT * FROM persons WHERE id=#{id}
+	</select>
+	
+	<select id="selectByName" parameterType="String" resultMap="result">
+		SELECT * FROM persons WHERE name LIKE CONCAT('%',#{name},'%')
+	</select>
+<!-- id:메서드명, parameterType:매개변수명, 1개만 지정가능, 
+	useGeneratedKeys:autoIncrement, 테이블에서 컬럼선언시 autoIncrement를 지정한 경우에만 동작함,
+	keyProperty는 설정하면 값을 다시 담아갈 수 있다 -->
+	<insert id="insert" parameterType="Person" 
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO persons (name) VALUES (#{name})	
+	</insert>
+	<update id="update" parameterType="Person">
+		UPDATE persons SET name=#{name} WHERE id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM persons WHERE id=#{id}
+	</delete>
+</mapper>
+
+
+
+
+
+
