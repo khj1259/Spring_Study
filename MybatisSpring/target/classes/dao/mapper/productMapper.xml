@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- sql 문을 작성 -->
+<mapper namespace="dao.mapper.productMapper">
+	 <select id="selectOne" parameterType="int" resultType="model.Product">
+	 	SELECT * FROM product WHERE code = #{code}
+	 </select>
+	 
+	 <select id="selectAll" resultType="model.Product">
+	 	SELECT * FROM product
+	 </select>
+	 
+	 <insert id="insert" parameterType="model.Product">
+	 	INSERT INTO product 
+	 	VALUES (#{code}, #{name}, #{price}, #{pictureurl}, #{description})
+	 </insert>
+	 
+	 <update id="update" parameterType="model.Product">
+	 	UPDATE product 
+	 	SET name=#{name}, price=#{price}, pictureurl=#{pictureurl}, description=#{description}
+	 	WHERE code=#{code}
+	 </update>
+	 
+	 <delete id="delete" parameterType="int">
+	 	DELETE FROM product WHERE code=#{code}
+	 </delete>
+</mapper>

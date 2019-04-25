@@ -1,0 +1,14 @@
+DROP TABLE product;
+
+CREATE TABLE product(
+	code INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(10),
+    price INT,
+    pictureurl VARCHAR(50),
+    description VARBINARY(50)
+);
+
+INSERT INTO product VALUES(1, 'coke', 1000, 'abc', 'ddd');
+INSERT INTO product VALUES(2, 'milk', 2000, 'zzz', 'ttt');
+
+SELECT * FROM product;

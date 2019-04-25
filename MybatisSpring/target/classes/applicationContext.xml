@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.springframework.org/schema/beans">
+	<context:component-scan base-package="dao"></context:component-scan>	
+	<!-- 변수명을 지정하지 않은 클래스들은 첫글자 소문자 이름으로 자동등록된다 -->
+		
+	<!-- 알리아스, 데이터베이스정보, 매퍼클래스 위치 -->
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC" />
+		<property name="username" value="root" />
+		<property name="password" value="tiger" />
+	</bean>
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="typeAliasesPackage" value="model"></property>
+		<property name="mapperLocations" value="classpath*:dao/mapper/*.xml"></property>
+												<!-- 매퍼xml의 경로 -->
+	</bean>
+	
+	<bean class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+</beans>
+
