@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.carMapper">
+
+	<!-- selectAll 을 부르려면 풀네임 mybatis.productMapper.selectAll 로 표현할 수 있다 -->
+	<select id="getCarList" resultType="car"> 
+		SELECT c.*, c2.vendor FROM car c INNER JOIN company c2 ON c.vcode = c2.vcode;
+	</select>
+	
+	<select id="getCodeList" resultType="car"> 
+		SELECT * FROM company order by vcode;
+	</select>
+	
+	
+	<insert id="insertCar" parameterType="car">
+		INSERT INTO car VALUES
+		(#{num}, #{model}, #{price}, #{vcode})
+	</insert>
+	
+	<select id="getCarView" parameterType="car" resultType="car"> 
+		SELECT c.*, c2.vendor FROM car c INNER JOIN company c2 ON c.vcode = c2.vcode WHERE c.num = #{num};
+	</select>
+	
+	
+	<delete id="deleteCar" parameterType="java.lang.String">
+		DELETE FROM car WHERE num = (#{num})
+	</delete>
+	
+	<select id="selectUser" parameterType="user" resultType="user"> 
+		SELECT * FROM userinfo WHERE id=#{id} AND pw=#{pw}
+	</select>
+	
+</mapper>
+
+<!-- mapper 파일 : sql 문 작성 -->
