@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SSAFY</title>
+<style type="text/css">
+#first div {
+	color: blue;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="first">
+		<div v-html="title"></div>
+		<div v-text="title"></div>
+		<div>{{title}}</div>
+		<div>{{showHrm()}}</div>
+		<div>{{showMyName('Hello')}}</div>
+		<div v-on:click="changeMyName">{{title}}</div>
+		<div @click="changeMyName">{{title}}</div>
+		<div><h3>{{title | toH3}}</h3></div> <!-- toH3(title) -->
+		<div><h3>{{title | toLower}}</h3></div> 
+		<div><h3>{{title | toUpper}}</h3></div> 
+		<div v-if="hasResult"><h3>안녕하세요</h3></div> <!-- false면 주석처리 -->
+		<div v-show="hasResult"><h3>안녕하세요</h3></div> <!-- false면 display:none -->
+	</div>
+	<script type="text/javascript">
+		var model = {title : '<h2>SSAFY</h2>'}
+		var first = new Vue({
+			el : "#first",
+			data : model,
+			computed:{
+				hasResult : function() {
+					return this.title.length < 4;
+				}
+			},
+			filters: { // 출력할 문자열을, 출력하기 직전에 변경하는데 좋다
+				toLower(value){
+					return value.toLowerCase();				
+				},
+				toUpper(value){
+					return value.toUpperCase();
+				},
+				toH3(value){
+					var s = "";
+					for(var i=0; i<3; i++){
+						s += "ssafy";
+					}
+					return s;
+				}
+			},
+			methods : {
+				showHrm : function() {
+					return "SSAFY HRM " + new Date();
+				},
+				showMyName : function(name) {
+					return "나의 이름 : " + name;
+				},
+				changeMyName : function($event){ // $event 정보 받기(가장 마지막 값)
+					this.title = '싸피싸피 이벤트정보:'+event;
+					console.log(event)
+				}
+			}
+		});
+		Vue.config.devtools = true;
+//		filters	: 최종 결과를 마지막에 가공할 때
+//		computed: 페이징시에 캐싱 방법으로 메모리에 저장해서 사용한다
+//				  watch 옵션으로 변경된 사항을 표시할 수 있다		
+//		mehtods : 함수호출 시마다 데이터가 변경이 될 경우 유리
+// 		결과적으로 화면에 표현되는 값은 위 세가지가 동일하다
+	</script>
+</body>
+</html>

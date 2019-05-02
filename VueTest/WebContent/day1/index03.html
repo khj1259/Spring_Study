@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SSAFY</title>
+<style type="text/css">
+#first div {
+	color: blue;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="first">
+		<div v-html="title"></div>
+	</div>
+	<div id="second">
+		<div onclick="hello('안녕하세요');">자바스크립트 이벤트 : 클릭하세요</div>
+	</div>
+	<input id="third" onclick="hello2(this);"/>
+	<script type="text/javascript">
+		var model = {title : '<h2>SSAFY</h2>'};
+		var first = new Vue({
+			el : '#first',
+			data : model
+		});
+		function hello(d) {
+			first.$data.title = d; // $data. 생략가능
+		};
+		function hello2(d) { // this
+			first.title = d.value;
+			console.log(d.value);
+			if(document.getElementById('third').value == d.value){
+				alert(d.value);
+			}
+		}
+		Vue.config.devtools = true;
+	</script>
+</body>
+</html>

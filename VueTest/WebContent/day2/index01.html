@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vue day2</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<section id="signup_section">
+		<h2>국기</h2>
+		국가이름1 <input type="text" v-html='myflag'><br> <!-- v-html 단방향, 변수값을 출력만 함 -->
+		<label><span v-html='myflag'></span></label><br>
+		국가이름2 <input type="text" v-model='myflag'> <!-- v-model은 양방향 바인딩 -->
+	</section>
+	<script type="text/javascript">
+		var model = {
+			myflag : 'd' //초기화
+		};
+		var signup_section = new Vue({
+			el : '#signup_section',
+			data : model
+		});
+		Vue.config.devtools = true;
+	</script>
+</body>
+</html>

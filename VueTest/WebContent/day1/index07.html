@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 도움되는 콘솔 경고를 포함한 개발 버전 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+<div id='first'>
+	<svg width="200" height="100">
+		<my-svg ccx="50" ccy="50" cr="40"></my-svg>
+		<my-svg ccx="150" ccy="50" cr="20"></my-svg>
+	</svg>
+</div>
+<script type="text/javascript">
+
+	var first = new Vue({
+		el: '#first',
+		components : {
+			'my-svg' : {
+				props : ['ccx','ccy','cr'],
+				
+				template : '<circle :cx="ccx" :cy="ccy" :r="cr" stroke="green" stroke-width="4" fill="yellow "/>'
+			}
+		}
+	});
+	
+	Vue.config.devtools = true;
+</script>
+</body>
+</html>

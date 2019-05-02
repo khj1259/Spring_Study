@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SSAFY</title>
+<style type="text/css">
+#first div {
+	color: blue;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="first">
+		{{title}}
+	</div>
+	<div id="second">
+		<div>{{titleshow()}}</div>
+		<div v-if="hasResult"><h3>{{title}}참</h3></div>
+		<div v-else="hasResult"><h3>{{title}}거짓</h3></div>
+		<div v-show="isL"><h3>{{title}}</h3></div>
+	</div>
+	<script type="text/javascript">
+		var model = {title:'<h2>SSAFY</h2>', isL:false};
+		var first = new Vue({
+			el : '#first',
+			data : model,
+			
+		});
+		var second = new Vue({
+			el : '#second',
+			data : model,
+			methods: {
+				titleshow : function() {
+					return first.title + "을 사용";
+				}
+			},
+			computed: {
+				hasResult : function() {
+					return this.title.length < 4;
+				}
+			}
+			
+		});
+		Vue.config.devtools = true;
+	</script>
+</body>
+</html>

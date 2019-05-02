@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SSAFY</title>
+<style>
+body {
+	background-color: #ffffff;
+}
+
+#second>h2 {
+	margin: auto;
+	padding: 0px;
+	text-align: center;
+	color: blue;
+}
+
+.red {
+	color: red;
+}
+
+#signup-form {
+	width: 70%;
+	height: 200px;
+	margin: auto;
+	padding: 20px;
+	text-align: center;
+	font-family: serif;
+	font-size: 14px;
+}
+
+#signup-form2 {
+	width: 70%;
+	height: 200px;
+	margin: auto;
+	padding: 20px;
+	text-align: center;
+	font-family: serif;
+	font-size: 14px;
+	color: red;
+}
+</style>
+<!-- 도움되는 콘솔 경고를 포함한 개발 버전 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<section id="signup_section">
+		<h2>국기</h2>
+		<template v-for="flag in flags"> <!-- 태그를 화면에 남기지 않을 때 -->
+			<label><span class="label" v-html="flag.name"></span></label>
+			<input type="text" v-bind:value="flag.korname"/><!-- v-bind 는 생략가능 -->
+			<img v-bind:src = "flag.flag"/><br/>
+		</template>
+	<table id="tid" border="1px">
+		<tr><td>나라이름</td><td>나라이름</td><td>국기이미지</td></tr>
+		<tr v-for="flag in flags">
+			<td><label><span class="label" v-html="flag.name"></span></label></td>
+			<td><input type="text" v-bind:value="flag.korname"/></td><!-- v-bind 는 생략가능 -->
+			<td><img v-bind:src = "flag.flag"/></td>
+		</tr>
+	</table>
+	</section>
+	<script type="text/javascript">
+		var model = {
+			flags :[{name:"Ghana", korname:"가나", flag:"http://cfile204.uf.daum.net/image/036F243550FF73392C8512"},
+					{name:"Korea", korname:"한국", flag:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/225px-Flag_of_South_Korea.svg.png"}]	
+		};
+		var signup_section = new Vue({
+			el : '#signup_section',
+			data : model
+		});
+		Vue.config.devtools = true;
+	</script>
+</body>
+</html>

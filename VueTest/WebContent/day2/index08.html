@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vue day2</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p> {{message}} </p>
+		<button v-on:click="reverseMsg">문자열 역순</button>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el : '#app',
+			data : {
+				message : "hello Vue"
+			},
+			computed : {
+				reverseMsg : function() {
+					return this.message.split('').reverse().join('');
+				}
+			}
+		});
+	</script>
+</body>
+</html>

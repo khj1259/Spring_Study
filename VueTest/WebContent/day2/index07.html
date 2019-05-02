@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vue day2</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<a v-if="flag">안녕 if 문</a>
+		<ul>
+			<li v-for="system in systems">{{system}}</li>
+		</ul>
+		<p v-show="flag">안녕 show 문</p>
+		<h5 v-bind:id="uid">뷰 Vue.js</h5>
+		<button v-on:click="popupAlert(10)">경고창 버튼</button>
+	</div>
+	<script type="text/javascript">
+		new Vue({
+			el:'#app',
+			data:{
+				flag:true,
+				systems:['android', 'ios', 'windows'],
+				uid : 10
+			},
+			methods : {
+				popupAlert : function(num, $event) {
+					console.log(event);
+					return alert("경고창 표시"+num);
+				}
+			}
+		});
+	</script>
+</body>
+</html>

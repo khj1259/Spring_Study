@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vue day2</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id = "mydirective">
+		<div v-mystyle="{color:'blue', fontsize:'20px', border:'1px', borderStyle:'dotted'}">월요일</div>
+		<div v-mystyle="{color:'red', fontsize:'20px', border:'1px', borderStyle:'solid'}">화요일</div>
+	</div>
+	<script type="text/javascript">
+		Vue.directive("mystyle", 
+			{bind(elm, binding, nodename){
+				/* console.log("elm === "+elm);
+				console.log("binding === "+binding);
+				console.log("nodename === "+nodename); */
+				elm.style.color = binding.value.color;
+				elm.style.fontSize = binding.value.fontSize;
+				elm.style.border = binding.value.border;
+				elm.style.borderStyle = binding.value.borderStyle;
+				elm.style.textAlign = 'center';
+			}
+		});
+		var mydirective = new Vue({
+			el : '#mydirective'
+		})
+		Vue.config.devtools = true;
+		
+		
+	// 디렉티브 문법 정리
+	// v-if		: true 일 경우 태그 실행, false 일 경우 <!-- --> 주석처리
+	// v-show	: true 일 경우 태그 실행, false 일 경우 display none 처리
+	// v-for	: 반복태그 실행
+	// v-bind	: 뷰의 데이터 속성과 HTML 속성을 연결 v-bind:id=""  :id 간소화해서 사용가능(비추)
+	// v-on		: 화면 요소에 이벤트 처리 v-on:click 클릭 이벤트 @click 간소화해서 사용가능(비추)
+	// v-modle	: 양방향 바인딩, form 요소에 주로 사용가능
+	// v-html	: inner HTML 바인딩한 문자열의 태그를 반영
+	// v-text	: inner Text 바인딩한 문자열에 태그가 있어도 문자열로 취급
+	</script>
+
+</body>
+</html>

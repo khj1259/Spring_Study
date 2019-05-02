@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vue day2</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<fieldset id="checkboxArea1">
+			<legend>알레르기 체크</legend>
+			<template v-for="alergin in alergins">
+				<input type="checkbox" name="box" v-bind:value="alergin" v-model="alergen" /><label>{{alergin}}</label>
+			</template>
+		</fieldset>
+		<fieldset id="checkboxArea2" v-if="moreZero">
+			알러지 요인들 : <span v-html="alergen"></span>
+		</fieldset>
+	</div>
+	<script type="text/javascript">
+		var model = {
+			alergen : [], // 변수의 초기화가 중요
+			alergins: ["대두","땅콩","우유","새우","참치","연어"]
+		};
+		var allergynes1 = new Vue({
+			el : '#app',
+			data : model,
+			computed : {
+				moreZero : function() {
+					return this.alergen.length > 0
+				}
+			}
+		});
+		Vue.config.devtools = true;
+	</script>
+</body>
+</html>

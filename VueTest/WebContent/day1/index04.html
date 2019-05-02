@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SSAFY</title>
+<style type="text/css">
+#first div {
+	color: blue;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="first">
+		<h3 v-html="title"></h3>
+	</div>
+	<script type="text/javascript">
+		var model = {title:'SSAFY'};
+		var first = new Vue({
+			el : '#first',
+			data : model,
+			beforeCreate : function() {
+			// 인스턴스가 준비되고 가장먼저 호출되는 콜백 메서드, this를 사용할 수 없다
+				console.log('beforeCreate : '+this.title);
+			},
+			created : function() {
+			// this, data, methods 속성이 정의됨
+				console.log('created : '+this.title);
+			},
+			beforeMount : function() {
+			// 마크업 속성을 render() 함수로 변환 후 지정한 위치에 부착하기 직전에 호출
+				console.log('beforeMount : '+this.title);
+			},
+			mounted : function() {
+			// 마크업 속성을 render() 함수로 변환 후 지정한 위치에 부착한 뒤 호출
+			// 화면 변경 로직을 수행할 수 있다
+				console.log('mounted : '+this.title);
+			},
+			beforeUpdate : function() {
+				console.log('beforeUpdate : '+this.title);
+			},
+			updated : function() {
+				console.log('updated : '+this.title);
+			}
+		});
+		Vue.config.devtools = true;
+	</script>
+</body>
+</html>
