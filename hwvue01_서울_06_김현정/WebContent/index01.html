@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./css1.css"/>
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<img alt="logo" src="./img/logo.PNG"><br>
+<h2>SSAFY 공지사항</h2>
+<div id="board">
+	<div v-for="i in datas" class="grayBox">
+		<div class="blueBox">
+			{{i.num}} : {{i.quser}} (<span class="red">{{i.location}}</span>)<br>
+			{{i.question}}
+		</div>
+		<div class="purpleBox">
+			<span v-html="i.answer"></span>
+			<a href="#" v-text="i.manager"></a>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var model = {
+	  datas: [
+			{
+				num : "1",
+				quser : "김동현",
+				location :"구미2",
+				question : "혹시 학사사이트 비밀번호를 잊어버렸을 경우 어떻게 해야 하나요?",
+				answer : '<span>비밀번호를 잊어버렸을 경우 아래의 방법으로 해결하시길 바랍니다.<br> <br> <strong>[비밀번호 찾기 방법]<br></strong>1) 학사시스템 로그인 화면에서 "비밀번호 찾기" 클릭 후&nbsp;비밀번호 재설정<br> 2)&nbsp;담당 운영자에게&nbsp;해결 문의&nbsp;<br>3) 교육센터 핫라인 (02-3429-5041) 으로 문의</span>',
+				manager : "사무국"
+			},
+			{
+				num : "2",
+				quser : "김한결",
+				location : "서울4",
+				question : "지각, 조퇴, 외출에 대한 구체적인 기준은 무엇인가요?",
+				answer : "지각, 조퇴, 외출에 관한 구체적인 기준은 다음과 같습니다.<br> <strong><span>[근태 기준]</span></strong><br> <span>- 지각 및 조퇴 : 교육 시작 및 종료시간 10분 이상 미준수</span><br> <span>- 외출 : 교육시간 中 1시간 이상 자리 비움</span><br> <span>-&nbsp;지각/조퇴/외출로 인해 출석시간 4시간 미만인 경우 결석 </span><span><br>※ 자세한 사항은 공지사항 [출결관리 세부 기준 안내] 참고",
+				manager : "프로"
+			},
+			{
+				num : "3",
+				quser : "홍길동",
+				location : "광주1",
+				question : "SSAFY 과정에 다니고 있다는 것을 증명할 수 있는 서류를 발급 받고 싶습니다. 혹시 관련 서류를 발급받을 수 있을까요?",
+				answer : '<span>SSAFY 과정에 관한 증명서가 필요할 경우&nbsp;지역별 캠퍼스로 요청하시길 바랍니다.<br></span></p> <p style="line-height: 150%;"><strong><span>[증명서 발급 기준 및 종류]</span></strong><br> <span>&nbsp;&nbsp;&nbsp;&nbsp; <strong>1) 수료증 및 성적 증명서</strong></span><br> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 대상 : 1학기 이상 교육 수료자 (1학기 中 중도퇴소자 제외)</span><br> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 내용 : 수료 과정명, 교육기간 및 총 이수시간 등</span><br> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 발급일 : 수료식 당일<br></span><br> <span>&nbsp;&nbsp;&nbsp;<strong>&nbsp; 2) 교육 증명서</strong></span><br> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 대상 : SSAFY 교육 수강중인 학생</span><br> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 내용 : 교육 과정명, 교육기간, 재학기간 등</span><br> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 발급일 : 학기 중 상시 발급</span><br> <br> <span>&nbsp;&nbsp;&nbsp;&nbsp;<strong> 3) 성적우수 상장</strong></span><br> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 대상 : 종합평가, 월말평가, S/W역량테스트 및 대외S/W경진대회 성적우수자 등</span><br> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 발급일: 해당 평가 후 상시 발급',
+				manager : "멀티캠퍼스"
+			},
+			{
+				num : "4",
+				quser : "이미정",
+				location : "대전4",
+				question : "학생증을 분실하였을 경우 어떻게 해야하나요?",
+				answer : "학생증 분실시 아래의 프로세스로 진행됩니다.<br> <br> <strong>[학생증 분실시&nbsp; 처리방법]<br></strong></p> <p style='line-height: 150%;'>1) 사무국 방문하여 '학생증 재발급' 양식 작성<br> 2) '우리은행 1006-780-000704' 15,000원 납부<br> 3) 납부 후 입금확인증 (이체확인증)을 운영자에게 제출<br> 4) 담당 프로 통한 학생증 수취 (최대 7일 소요)</p<p style='line-height: 150%;'>강의장 이용, 식사 이용 등 전반적인 SSAFY 활동에 제약이 있을 수 있으므로 분실하지 않도록 주의하시길 바랍니다.",
+				manager : "사무국"
+			},					
+			{
+				num : "5",
+				quser : "박송자",
+				location : "서울10",
+				question : "강의 중 작성한 코드를 Git에 올려 관리해도 될까요?",
+				answer : "SSAFY에서 작성한 문제와 소스코드는 공유 불가능하지만, 교육생이 직접 작성한 소스코드와 내용 정리는 보관이 가능합니다. <br>※ SSAFY에서 제공한 콘텐츠를 그대로 게시하는 것은 불가하니 유의하시길 바랍니다.",
+				manager : "사무국"
+			}
+		]
+	};
+	
+	new Vue({
+		el : '#board',
+		data : model
+	});
+</script>
+</body>
+</html>
