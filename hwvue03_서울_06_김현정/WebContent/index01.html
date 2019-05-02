@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	 <h1>SSAFY</h1>
+	 <hr>
+	 <div id="section1">
+		 <template v-for="name in names">
+		 	<input type="checkbox" name="box" v-bind:value="name" v-model="checked"><label>{{name}}</label>
+		 </template>
+		 <div v-if="moreZero(1)">
+		 	체크한 이름 : <span v-html="checked"></span>
+		 </div>
+		 <hr>
+	 	<input type="radio" name="radio" value="One" v-model="radio"><label>One</label><br>
+	 	<input type="radio" name="radio" value=Two v-model="radio"><label>Two</label>
+	 	<div v-if="moreZero(2)">선택 : {{radio}}</div>
+	 	<hr>
+	 	<select v-model="selected" name="select" multiple="multiple">
+	 		<option value="A">A</option>
+	 		<option value="B">B</option>
+	 		<option value="C">C</option>
+	 	</select>
+	 	<div v-if="moreZero(3)">Selected: {{selected}}</div>
+	 </div>
+	 <script type="text/javascript">
+	 	new Vue({
+	 		el : '#section1',
+	 		data : {
+	 			names : ["Jack","John","Mike"],
+	 			checked : [],
+	 			radio : [],
+	 			selected : []
+	 		},
+	 		methods : {
+	 			moreZero : function(num) {
+	 				if(num==1){
+						return this.checked.length > 0
+	 				}else if(num==2){
+	 					return this.radio.length > 0
+	 				}else if(num==3){
+	 					return this.selected.length > 0
+	 				}
+				}
+	 		}
+	 	});
+	 </script>
+</body>
+</html>
