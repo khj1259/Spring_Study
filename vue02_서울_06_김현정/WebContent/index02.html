@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="./table.css"/>
+<title>SSAFY</title>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id='app'>
+<div class='headtitle'><h2>SSAFY HRM SEARCH BY ID</h2></div>
+<div class='search_box'>
+<a href='./index04.html'>사원추가</a> | 
+<a href='./index03.html'>이름으로 찾기</a> |
+<a href='./index02.html'>아이디로 찾기</a> |
+<a href='./index01.html'>모든사원 보기</a>
+</div>
+<div class='search_box'>
+ <select name='id' v-model="cid" @change='findbyid' v-cloak>
+  <option v-for="emp in info" v-bind:value="emp.id">
+   {{ emp.name }}
+  </option>
+</select>
+</div>
+<table class='list_table'>
+<col width="10%"><col width="20%">
+<col width="20%"><col width="20%"><col width="10%">
+<tr>
+  <th>사원 아이디</th>
+  <th>사원명</th>
+  <th>부서</th>
+  <th>직책</th>
+  <th>연봉</th>
+</tr>
+ <tr>
+<tr v-for="emp in cemp" v-if="emp.id==cid">
+  <td v-html="emp.id"></td>
+  <td v-html="emp.name"></td>
+  <td v-html="emp.dept_id"></td>
+  <td v-html="emp.title"></td>
+  <td>{{ emp.salary | salarydecimal }}</td>
+</tr>
+ 
+</table>
+</div>
+<script type="text/javascript">
+new Vue({
+  el: '#app',
+  data () {
+    return {
+      info: [],
+      loading: true,
+      errored: false ,
+      cid:'',
+      cemp:[]
+    }
+  },
+  filters: {
+	   salarydecimal (value) {
+      return value.toFixed(2)
+    }
+  }, 
+  mounted () {
+    axios
+      //.get('http://localhost:8197/ssafyvue/api/findAllEmployees')
+      .get('./emp.json')
+      .then(response => (this.info = response.data))
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
+      .finally(() => this.loading = false);
+  },
+  methods: {
+	   findbyid() {
+		   alert(this.cid);
+		   axios
+		     .get('./emp.json')
+		    .then(response => (this.cemp = response.data))
+		    .catch(error => {
+		      console.log(error)
+		      this.errored = true
+		    })
+		    .finally(() => this.loading = false);
+	   }
+  }
+})
+ </script>
+</body>
+</html>
