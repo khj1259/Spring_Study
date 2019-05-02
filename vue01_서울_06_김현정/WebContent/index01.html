@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="./table.css"/>
+<title>SSAFY</title>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id='app'>
+<div class='headtitle'><h2>SSAFY HRM LIST</h2></div>
+<div class='search_box'>
+<a href='./index04.html'>사원추가</a> | 
+<a href='./index03.html'>이름으로 찾기</a> |
+<a href='./index02.html'>아이디로 찾기</a> |
+<a href='./index01.html'>모든사원 보기</a>
+</div>
+<table class='list_table'>
+<col width="10%"><col width="20%">
+<col width="20%"><col width="20%"><col width="10%">
+<tr>
+  <th>사원 아이디</th>
+  <th>사원명</th>
+  <th>부서</th>
+  <th>직책</th>
+  <th>연봉</th>
+</tr>
+<!--  여기에 <tr v-for -->
+<tr v-for="i in info">
+	<td><span v-text="i.id"></span></td>
+	<td><span v-text="i.name"></span></td>
+	<td><span v-text="i.dept_id"></span></td>
+	<td><span v-text="i.title"></span></td>
+	<td>{{i.salary | salarydecimal}}</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript">
+new Vue({
+  el: '#app',
+  data : {
+      info: [{"id":1,"name":"박구곤","mailid":"sky98","start_date":"1990-03-03","manager_id":0,"title":"사장","dept_id":118,"salary":5000.0,"commission_pct":0.0},
+    	  {"id":2,"name":"손명성","mailid":"2xxsig","start_date":"1990-03-08","manager_id":1,"title":"기획부장","dept_id":110,"salary":3000.0,"commission_pct":0.0},
+    	  {"id":3,"name":"이은선","mailid":"ch21175","start_date":"1991-06-17","manager_id":1,"title":"영업부장","dept_id":102,"salary":3500.0,"commission_pct":0.0},
+    	  {"id":4,"name":"서의홍","mailid":"mquickto","start_date":"1990-04-07","manager_id":1,"title":"총무부장","dept_id":101,"salary":3000.0,"commission_pct":0.0}
+],
+      loading: true,
+      errored: false 
+  },
+  filters: {
+	   salarydecimal (value) {
+      return value.toFixed(2)
+    }
+  }
+})
+ </script>
+</body>
+</html>
