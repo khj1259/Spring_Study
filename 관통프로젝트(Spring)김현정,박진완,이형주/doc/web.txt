@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>SF_WS_03</display-name>
+  
+  
+  <!-- 아래 리스너에서 실행될 설정파일을 등록 -->
+  <context-param>  
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring/application-config.xml</param-value>
+  </context-param>
+  
+  <!-- 리스너 등록, 처음 구동될때 설정파일을 읽어서 스프링 루트컨테이너를 빌드되도록 하는 리스너, 
+  		기본설정파일은 /WEB-INF/applicationContext.xml 인데 위 <context-param>를 작성하면 설정파일을 바꿀수 있음 -->
+  <listener> 
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <!-- dispatcherServlet 이름으로 서블릿을 하나 등록함, <init-param>을 통해서 사용할 설정파일을 지정
+  		dispatcherServlet 은 Front Controller로써 요청을 분류하여 적절한 url로 넘겨주는 역할 -->
+  <servlet>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/mvc-config.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup> <!-- 서블릿을 초기화하는 순서, 1이상이면 초기화대상임, 숫자가 작을수록 먼저초기화됨 -->
+  </servlet>
+
+  <!-- url매핑 -->  
+  <servlet-mapping>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <!-- 한글처리를 위한 인코딩 필터 -->
+  <filter>
+    <filter-name>encoding</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encoding</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+</web-app>

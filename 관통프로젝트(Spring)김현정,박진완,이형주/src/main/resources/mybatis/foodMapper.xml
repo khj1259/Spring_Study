@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.foodMapper">
+	
+	<select id="selectAll" resultType="Food">
+		SELECT * FROM food
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultType="Food">
+		SELECT * FROM food WHERE code=#{code}
+	</select>
+
+	<select id="searchByName" parameterType="String" resultType="Food">
+		SELECT * FROM food WHERE name LIKE CONCAT('%',#{searchValue},'%')
+	</select>
+
+	<select id="searchByMaker" parameterType="String" resultType="Food">
+		SELECT * FROM food WHERE maker LIKE CONCAT('%',#{searchValue},'%')
+	</select>
+
+	<select id="searchByMaterial" parameterType="String" resultType="Food">
+		SELECT * FROM food WHERE material LIKE CONCAT('%',#{searchValue},'%')
+	</select>
+	
+	<insert id="insertEatFood" parameterType="EatFood">
+		INSERT INTO eatfood VALUES(0,#{id},#{code},#{cnt})
+	</insert>
+	
+	<select id="selectAllEatFood" parameterType="String" resultType="MyEatFood">
+		SELECT B.code, B.img, B.name, A.cnt, A.eatfoodcode 
+		FROM eatfood A INNER JOIN food B USING(code) 
+		WHERE id=#{id};
+	</select>
+	
+	<delete id="deleteEatFood" parameterType="int">
+		DELETE FROM eatfood WHERE eatfoodcode=#{eatfoodcode}
+	</delete>
+	
+	<update id="updateEatFood" parameterType="EatFood">
+		UPDATE eatfood SET cnt=#{cnt} WHERE eatfoodcode=#{eatfoodcode}
+	</update>
+	
+</mapper>
+
+<!-- mapper 파일 : sql 문 작성 -->
