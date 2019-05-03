@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>axios</title>
+<style>
+body {
+	background-color: #ffffff;
+}
+
+#second>h2 {
+	margin: auto;
+	padding: 0px;
+	text-align: center;
+	color: blue;
+}
+
+.red {
+	color: red;
+}
+
+#tid {
+	border: 1px;
+	border-color: blue;
+	border-collapse: collapse;
+	margin: auto;
+	text-align: center;
+}
+</style>
+<script src="https://unpkg.com/vue"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+</head>
+<body>
+	<div id='second'>
+		<h2>SSAFY FLAG</h2>
+	</div>
+	<div id="app">
+		<section v-if="errored">
+			<p>Error In AJAX Transport</p>
+		</section>
+		<section v-else>
+			<div v-if="loading">Loading...</div>
+			<select v-model="selectflag">
+				<option v-for="flag in info" v-bind:value="flag.name">
+					{{flag.korname}}</option>
+			</select> <span>선택한 국기: <span v-html='selectflag'></span></span>
+			<template v-for="flag in info"> 
+				<img v-show="flag.name==selectflag" v-bind:src="flag.flag" /> 
+			</template>
+		</section>
+	</div>
+	<script type="text/javascript">
+  new Vue({
+	  el: '#app',
+	  data () {
+	    return {	
+	      info: [],
+	      loading: true,
+	      errored: false,
+	      selectflag:' '
+	    }
+	  },
+	  mounted () {
+	    axios
+	      .get('./flags.json')
+	      .then(response => (this.info = response.data.nationalflags))
+	      .catch(error => {
+	        console.log(error)
+	        this.errored = true
+	      })
+	      .then(() => this.loading = false)
+	  }
+	});
+  
+  </script>
+</body>
+</html>

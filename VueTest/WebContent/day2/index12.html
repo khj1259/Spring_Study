@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vue day2</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+	<div id="second">
+		<h2>SSAFY SAFE FOOD</h2>
+	</div>
+	<div id="app">
+		<section v-if="errored">
+			<p>Error In AJAX Transport</p>
+		</section>
+		<section v-else>
+			<div v-if="loading">Loading...</div>
+			<table id="tid" border="1px">
+				<tr>
+					<td>분류</td>
+					<td>이름</td>
+					<td>이미지</td>
+				</tr>
+				<div v-else>
+					<tr v-for="emp in info">
+						<td v-html="emp.productGb"></td>
+						<td v-html="emp.prdlstNm"></td>
+						<td><img v-bind:src="emp.imgurl1"></td>
+					</tr>
+				</div>
+			</table>
+		</section>
+	</div>
+
+	<script type="text/javascript">
+		new Vue({
+			el : '#app',
+			data(){
+				return {
+					info : [],
+					loading : true,
+					errored : false
+				}
+			},
+			mounted(){
+				axios
+					.get('./food.json')
+					.then(response => (this.info = response.data))
+					.catch(error => {
+						console.log(error);
+						this.errored = true;
+					})
+					.then(() => this.loading = false)
+			}
+		})	
+	
+	
+	/* 
+	axios 액시오스 : Vue 커뮤니티에서 가장 많이 사용되는 HTTP 통신 라이브러리
+				  공식 깃허브 레포지토리에 자세한 안내 설명 참고 - https://github.com/axios/axios
+				  설치방법 NPM, CDN 두가지 방법
+				 script src="https://unpkg.com/axios/dist/axios.min.js"
+				  
+				 사용방법
+				 axios.get('URL 주소').then(성공시 실행내용).catch(에러발생시 실행내용).then(항상 실행)
+				 axios.post('URL 주소').then(성공시 실행내용).catch(에러발생시 실행내용).then(항상 실행)
+				 axios({옵션을 지정})
+	*/
+	
+	</script>
+</body>
+</html>

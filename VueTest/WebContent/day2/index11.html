@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SSAFY</title>
+  <style>
+    body {background-color: #ffffff;}
+    #second  > h2 { margin:auto; padding:0px; text-align:center; color: blue;}	
+    .red {color: red;}
+    #signup-form{width:70%;height:200px; margin:auto; padding:20px; text-align:center; font-family: serif; font-size: 14px;}
+    #signup-form2{width:70%;height:200px; margin:auto; padding:20px; text-align:center; font-family: serif; font-size: 14px;color: red; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+</head>
+<body>
+  <div id='second'>
+    <h2 v-html="title"></h2>
+  </div>
+  
+<section id="signup_section">
+<div id='signup_form'>
+	<h2>Sign Up Form</h2>
+ 	<form id="_formhrm" action="./main.do" method="post">
+		<label><span class="label">아이디<span class='red'>*</span></span></label>
+		<input id="_signId" name="id" type="text" v-model="id" placeholder="아이디를 입력하세요"/><br/>
+		<label><span class="label">비밀번호<span class='red'>*</span></span></label>
+		<input id="_signPw" name="pw" type="password" v-model="pw" placeholder="패스워드를 입력하세요"/><br/>
+		<label><span class="label">이름<span class='red'>*</span></span></label>
+		<input id="_signName" name="name" type="text" v-model="name" placeholder="이름을 입력하세요"/><br/>
+		<label><span class="label">주소<span class='red'>*</span></span></label>
+		<input id="_signAddress" name="address" type="text" v-model="address" placeholder="주소를 입력하세요"/><br/>
+		<label><span class="label">전화번호<span class='red'>*</span></span></label>
+		<input id="_signPhone" name="phone" type="tel" v-model="phone" placeholder="010-xxxx-xxxx"/><br/>
+	</form>
+</div>
+<div id='signup_form2'>
+<fieldset>
+              <span v-html="id"></span>
+              <span v-html="pw"></span>
+              <span v-html="name"></span>
+              <span v-html="address"></span>
+              <span v-html="phone"></span>
+  	</fieldset>
+</div>
+</section>
+   			
+  <script type="text/javascript">
+  var signup_section = new Vue({
+      el : '#signup_section',
+      data : {
+          id : '',
+          pw : '',
+          name : '',
+          address : '',
+          phone : '',
+      }
+    })
+  var second = new Vue({
+      el: '#second',
+      data: {title: 'SSAFY HRM'}
+    });
+  Vue.config.devtools = true;
+  </script>
+</body>
+</html>
