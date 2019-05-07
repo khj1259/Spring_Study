@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="./table.css" />
+<title>SSAFY</title>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+<div id='app'>
+	<div class='headtitle'>
+		<h2>SSAFY HRM</h2>
+	</div>
+	<div class='search_box'>
+		<router-link to="/route1">사원추가</router-link>
+		<router-link to="/route2">이름으로 찾기</router-link>
+		<router-link to="/route3">아이디로 찾기</router-link>
+		<router-link to="/route4">모든사원 보기</router-link>
+	</div>
+
+	<router-view></router-view> <!-- 갱신할 화면 영역 -->
+	
+
+</div>
+<script type="text/x-template" id="addhrmtemplate">
+	<div>
+		사원추가 화면
+	<div>
+</script>
+<script type="text/x-template" id="namehrmtemplate">
+	<div>
+		이름으로 찾기 화면
+	<div>
+</script>
+<script type="text/x-template" id="idhrmtemplate">
+	<div>
+		아이디로 찾기 화면
+	<div>
+</script>
+<script type="text/x-template" id="listhrmtemplate"> 
+ 	<div>
+ 		모든사원 보기 화면
+ 	</div>
+</script>
+
+<script type="text/javascript">
+	// 라우팅(routing) : 어떤 영역 안에서 웹페이지 간의 이동 방법
+	// SPA 에서 요청 경로에 따라 다른 템플릿을 보여주고자 할 때                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+	// SPA(Single Page Application) : 페이지를 이동할 때 마다 서버에서 웹페이지를 요청하여 새로 갱신하는 것이 아니라,
+	//	미리 해당페이지들을 받아놓고, 페이지 이동시 클라이언트의 라우팅 기능을 이용하여 화면을 갱신하는 패턴을 적용한 애플리케이션
+
+	var addhrm = Vue.component('addhrm',{
+	    template: '#addhrmtemplate'
+	});
+	var namehrm = Vue.component('namehrm',{
+	    template: '#namehrmtemplate'
+	});
+	var idhrm = Vue.component('idhrm',{
+	    template: '#idhrmtemplate'
+	});
+	var listhrm = Vue.component('listhrm',{
+	    template: '#listhrmtemplate'
+	});
+	
+	const Route1 = { template: addhrmtemplate} // 컴포넌트 정의
+	const Route2 = { template: namehrmtemplate }
+	const Route3 = { template: idhrmtemplate}
+	const Route4 = { template: listhrmtemplate }
+	
+	const routes = [
+	   { path: '/route1', component: Route1 }, // 각 URL 에 표시할 컴포넌트 연결
+	   { path: '/route2', component: Route2 },
+	   { path: '/route3', component: Route3 },
+	   { path: '/route4', component: Route4 }
+	];
+	const router = new VueRouter({ // vue router 정의
+	   routes 
+	});
+	var App=new Vue({ // vue 인스턴스 생성, router 추가
+	  el: '#app',
+	  router
+	})
+ </script>
+</body>
+</html>
+

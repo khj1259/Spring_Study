@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SSAFY</title>
+<script src="https://unpkg.com/vue"></script> <!-- vue cdn 최신버전 -->
+</head>
+<body>
+	<div id='first'>
+		<firstcomponent></firstcomponent>
+	</div>
+
+	<!-- 템플릿을 지정하는 코드, <div>로 반드시 감싸야 함, 이부분은 문자열로 취급, 오타찾기 힘듦 -->
+	<script type="text/x-template" id="atemplate">
+		<div><h1>div가 반드시 있어야 됩니다. </h1></div> 
+	</script>
+
+	<script type="text/javascript">
+		Vue.component('firstcomponent', { // div 태그가가 firstcomponent에 적용
+			template : '#atemplate'// id가 atemplate 인 곳의 태그를 지칭
+		});
+		var first = new Vue({
+			el : '#first'
+		});
+		Vue.config.devtools = true;
+	</script>
+</body>
+</html>
+

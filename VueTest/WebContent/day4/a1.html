@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="app">
+		<div>{{title}}</div>
+	</div>
+	안녕하세요
+	<script type="text/javascript">
+		var app = new Vue({
+			el : '#app',
+			data :{
+				title : 'Hello Vue.js'
+			}
+		});
+		Vue.config.devtools = true;
+	</script>
+</body>
+</html>

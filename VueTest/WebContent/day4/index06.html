@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="./table.css" />
+<title>SSAFY</title>
+<script src="https://unpkg.com/vue"></script> <!-- Vue 최신버전 반영 -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- axios -->
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script> <!-- Vue router 사용 -->
+</head>
+<body>
+<div id='app'>
+	<div class='headtitle'>
+		<h2>SSAFY HRM</h2>
+	</div>
+	<div class='search_box'>
+		<router-link to="/route1">사원추가</router-link> <!-- 이동할 페이지 <a href 와 비슷한 느낌 -->
+		<router-link to="/route2">이름으로 찾기</router-link>
+		<router-link to="/route3">아이디로 찾기</router-link>
+		<router-link to="/route4">모든사원 보기</router-link>
+	</div>
+
+	<router-view></router-view> <!-- 갱신할 화면영역 -->
+
+</div>
+<script type="text/x-template" id="addhrmtemplate">
+	<div>
+		<form action="" method="post" id="_frmForm" name="frmForm">
+			<table class="content_table">
+				<colgroup>
+					<col style="width: 30%;" />
+					<col style="width: 70%;" />
+				</colgroup>
+				<tr>
+					<th>이름</th>
+					<td><input data-msg="이름" type="text" name="name" id="_name"
+						size="30" /></td>
+				</tr>
+				<tr>
+					<th>이메일</th>
+					<td><input data-msg="이메일" type="text" name="mailid"
+						id="_mailid" size="20" /></td>
+				</tr>
+				<tr>
+					<th>고용일</th>
+					<td><input data-msg="고용일" type="date" name="start_date"
+						id="_start_date" size="30" /></td>
+				</tr>
+				<tr>
+				<tr>
+					<th>월급</th>
+					<td><input data-msg="월급" type="number" name="salary"
+						id="_salary" size="30" min="0" /></td>
+				</tr>
+				<tr>
+					<th>커미션</th>
+					<td><input data-msg="커미션" type="number" name="commission_pct"
+						id="_commission_pct" size="30" min="0" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="height: 50px; text-align: center;">
+						<button type="submit" name="button">사원추가</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</script>
+<script type="text/x-template" id="namehrmtemplate">
+	<div>
+		<div class='search_box'>
+			이름으로 찾기 : <input type="text" name='name' />
+		</div>
+		<table class='list_table'>
+			<col width="10%">
+			<col width="20%">
+			<col width="20%">
+			<col width="20%">
+			<col width="10%">
+			<tr>
+				<th>사원 아이디</th>
+				<th>사원명</th>
+				<th>부서</th>
+				<th>직책</th>
+				<th>연봉</th>
+			</tr>
+		</table>
+	</div>
+</script>
+<script type="text/x-template" id="idhrmtemplate">
+	<div>
+		<div class='search_box'>
+			아이디로 찾기 : <input type="text" name='id' />
+		</div>
+		<table class='list_table'>
+			<col width="10%">
+			<col width="20%">
+			<col width="20%">
+			<col width="20%">
+			<col width="10%">
+			<tr>
+				<th>사원 아이디</th>
+				<th>사원명</th>
+				<th>부서</th>
+				<th>직책</th>
+				<th>연봉</th>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>홍길동</td>
+				<td>영업부</td>
+				<td>사원</td>
+				<td>12345</td>
+			</tr>
+			<tr>
+		</table>
+	<div>
+</script>
+<script type="text/x-template" id="listhrmtemplate">
+	<div>
+		<table class='list_table'>
+			<col width="10%">
+			<col width="20%">
+			<col width="20%">
+			<col width="20%">
+			<col width="10%">
+			<tr>
+				<th>사원 아이디</th>
+				<th>사원명</th>
+				<th>부서</th>
+				<th>직책</th>
+				<th>연봉</th>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>홍길동</td>
+				<td>영업부</td>
+				<td>사원</td>
+				<td>12345</td>
+			</tr>
+		</table>
+	</div>
+</script>
+
+<script type="text/javascript">
+	var addhrm = Vue.component('addhrm',{
+	    template: '#addhrmtemplate'
+	});
+	var namehrm = Vue.component('namehrm',{
+	    template: '#namehrmtemplate'
+	});
+	var idhrm = Vue.component('idhrm',{
+	    template: '#idhrmtemplate'
+	});
+	var listhrm = Vue.component('listhrm',{
+	    template: '#listhrmtemplate'
+	});
+	
+	const Route1 = { template: addhrmtemplate} // 컴포넌트 정의
+	const Route2 = { template: namehrmtemplate }
+	const Route3 = { template: idhrmtemplate}
+	const Route4 = { template: listhrmtemplate }
+	
+	const routes = [
+	   { path: '/route1', component: Route1 }, // 각 URL 에 표시할 컴포넌트 연결
+	   { path: '/route2', component: Route2 },
+	   { path: '/route3', component: Route3 },
+	   { path: '/route4', component: Route4 }
+	];
+	const router = new VueRouter({ // vue router 정의
+	   routes 
+	});
+	var App=new Vue({ // vue 인스턴스 생성, router 추가
+	  el: '#app',
+	  router
+	})
+ </script>
+</body>
+</html>
