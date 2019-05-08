@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.productMapper">
+
+	<!-- selectAll 을 부르려면 풀네임 mybatis.productMapper.selectAll 로 표현할 수 있다 -->
+	<select id="selectAll" resultType="product"> 
+		SELECT * FROM product
+	</select>
+	<insert id="insert" parameterType="product">
+		INSERT INTO product VALUES
+		(#{id}, #{name}, #{price}, #{description})
+	</insert>
+</mapper>
+
+<!-- mapper 파일 : sql 문 작성 -->

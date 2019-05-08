@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- 콘솔 로그 -->
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<!-- <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern> -->
+			<!-- <pattern>[%d{yy-MM-dd HH:mm:ss}] [%5p] [%c{1}.%M-%3L] %m %n</pattern> -->
+			<pattern>[%d{HH:mm:ss}] [%5p] [%c{1}.%M-%3L] %m %n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 날짜별 로그 -->
+	<property name="DEV_HOME" value="c:/temp" />
+	<appender name="DAILYOUT"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${DEV_HOME}/logFile.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>/log/logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<!-- root 로거 기본 설정 -->
+	<logger name="org" level="trace"></logger>
+	<!-- <logger name="org.springframework" level="info"></logger>
+	<logger name="org.aspectj" level="info"></logger> -->
+	<!-- root 로거 기본 설정 -->
+	<root level="TRACE">
+		<appender-ref ref="STDOUT" />
+		<!-- <appender-ref ref="DAILYOUT" /> -->
+	</root>
+</configuration> 

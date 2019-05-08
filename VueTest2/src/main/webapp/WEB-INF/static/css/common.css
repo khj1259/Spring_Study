@@ -1,0 +1,15 @@
+.title {				/*모든 페이지의 타이틀에 적용한다.*/
+	font-size: 3em;
+	text-align: center;
+}
+
+.right {				/*우측 정렬이 필요한 요소들에 적용한다.*/
+	display: flex;
+	justify-content: flex-end;
+}
+
+.input_label {			/*<input>과 연결된 <label>에 적용한다.*/
+	display: inline-block;
+	width: 100px;
+	background: gray;
+}

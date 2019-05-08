@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 	<setting name="mapUnderscoreToCamelCase" value="true"/> -->
+<!-- 	<setting name="jdbcTypeForNull" value="NULL"/> -->
+	
+<!-- 아래설정은 DTO, 데이터베이스 테이블 설정 이후 진행 -->
+	<typeAliases>
+		<typeAlias type="com.ssafy.model.dto.Product" alias="product"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mybatis/productMapper.xml"/>
+	</mappers>
+</configuration>
+<!--
+마이바티스 설정파일임
+	타입알리아스
+	매퍼 파일
+	변수명과 컬럼명을 동일하게 맞출경우 간단함
+  -->
