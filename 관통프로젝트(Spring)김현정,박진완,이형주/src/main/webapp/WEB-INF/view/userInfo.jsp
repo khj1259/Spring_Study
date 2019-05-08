@@ -180,11 +180,23 @@ $(function() {
 			<a href="main.mvc"><img class="logo" alt="logo"
 				src="img/logo.png"></a>
 			<ul>
-				<li class="info_eat">예상 섭취 정보</li>
+				<c:if test="${not empty user }">
+					<a href="expectedIntake.mvc"><li class="info_eat">예상 섭취 정보</li></a>
+				</c:if>
+				<c:if test="${empty user }">
+					<li class="info_eat">예상 섭취 정보</li>
+				</c:if>
 				<li class="info_my"><a href="eatFoodList.mvc">내 섭취정보</a></li>
 				<li class="info_best">베스트 섭취 정보</li>
 				<li class="info_item"><a href="foodlist.mvc">상품정보</a></li>
-				<li class="announce">공지사항</li>
+				<li class="announce">
+                <c:if test="${not empty user }">
+                        <a href="boardList.mvc">공지사항</a>
+                </c:if>
+                <c:if test="${empty user }">
+                      		  공지사항
+                </c:if>    
+                </li>
 			</ul>
 			<img class="lens" alt="search" src="img/lens.png">
 		</nav>

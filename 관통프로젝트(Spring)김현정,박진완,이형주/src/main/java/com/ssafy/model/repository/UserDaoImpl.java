@@ -15,12 +15,12 @@ public class UserDaoImpl implements UserDao{
 	
 	@Override
 	public int signUp(User user) {
-		return session.insert("signup", user);
+		return session.insert(namespace+"signup", user);
 	}
 
 	@Override
 	public User signIn(User user) {
-		return session.selectOne("signin", user);
+		return session.selectOne(namespace+"signin", user);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public void modify(String id, String password, String name, String address, String phone, String allergy) {
 		User user = new User(id,password,name,address,phone,allergy);
-		session.update("modify",user);
+		session.update(namespace+"modify",user);
 	}
 
 	@Override
@@ -43,12 +43,12 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public int delete(User user) {
-		return session.delete("delete",user);
+		return session.delete(namespace+"delete",user);
 	}
 
 	@Override
     public User searchPass(User user) {
-        return session.selectOne("searchpass", user);
+        return session.selectOne(namespace+"searchpass", user);
     }
 
 }

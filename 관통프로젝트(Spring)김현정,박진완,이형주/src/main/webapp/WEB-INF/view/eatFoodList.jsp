@@ -16,6 +16,13 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
+.bono{
+	position:absolute;
+	float: left;
+	padding-right: 10px;
+	
+}
+
 .contents {
 	width: 50%;
 	background-color: #F6F6F6;
@@ -23,9 +30,9 @@
 	padding: 50px;
 }
 
-form {
+/* form {
 	padding: 50px;
-}
+} */
 
 nav.blackbar {
 	list-style: none;
@@ -214,11 +221,20 @@ nav ul a {
 			<a href="main.mvc"><img class="logo" alt="logo"
 				src="img/logo.png"></a>
 			<ul>
-				<li class="info_eat">예상 섭취 정보</li>
+				<c:if test="${not empty user }">
+					<a href="expectedIntake.mvc"><li class="info_eat">예상 섭취 정보</li></a>
+				</c:if>
+				<c:if test="${empty user }">
+					<li class="info_eat">예상 섭취 정보</li>
+				</c:if>
 				<li class="info_my"><a href="eatFoodList.mvc">내 섭취정보</a></li>
 				<li class="info_best">베스트 섭취 정보</li>
 				<li class="info_item"><a href="foodlist.mvc">상품정보</a></li>
-				<li class="announce">공지사항</li>
+				<li class="announce"><c:if test="${not empty user }">
+						<a href="boardList.mvc">공지사항</a>
+					</c:if> <c:if test="${empty user }">
+                      		  공지사항
+                </c:if></li>
 			</ul>
 			<img class="lens" alt="search" src="img/lens.png">
 		</nav>
@@ -228,20 +244,25 @@ nav ul a {
 		<h5>건강한 삶을 위한 먹거리 프로젝트</h5>
 	</div>
 	<div class="darkbox">
-		<table>
-			<tr>
-				<td>검색조건</td>
-				<td>검색단어</td>
-				<td>&nbsp</td>
-			</tr>
-			<tr>
-				<td><select name="search_opt">
-						<option value="name">상품명</option>
-				</select></td>
-				<td><input type="text"></td>
-				<td><button>검색</button></td>
-			</tr>
-		</table>
+		<form action="search_result.mvc" method="get">
+			<table>
+				<tr>
+					<td>검색조건</td>
+					<td>검색단어</td>
+					<td>&nbsp</td>
+				</tr>
+				<tr>
+					<td><select name="search_opt">
+							<option value="name">식품명</option>
+							<option value="maker">제조사</option>
+							<option value="material">원재료</option>
+					</select></td>
+					<td><input type="text" name="searchValue"></td>
+					
+					<td><button id="search" type="submit">검색</button></td>
+				</tr>
+			</table>
+		</form>
 	</div>
 	<!-- contents -->
 	<nav aria-label="breadcrumb" role="navigation">
@@ -253,8 +274,13 @@ nav ul a {
 	</nav>
 	<div class="back">
 		<div class="container">
-			<h2>나의 섭취 식품</h2>
+			<fieldset>
+			<legend><h2>나의 섭취 식품<img src="img/bono.gif" width=150px height=150px></h2>
 			<br>
+			<br>
+			</legend>
+			</fieldset>
+			
 		<c:forEach items="${list }" var="food" varStatus="idx">
 			<c:choose>
 				<c:when test="${idx.count mod 2 eq 1 }">

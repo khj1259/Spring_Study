@@ -11,6 +11,13 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+function login(){
+	alert('로그인 후 조회 가능합니다');
+}
+</script>
+
 <title>Insert title here</title>
 <style type="text/css">
 nav.blackbar {
@@ -128,13 +135,13 @@ header img {
 }
 
 .container {
-	display: inline-block;
+	/* display: inline-block; */
 	padding-top: 100px;
 }
 
 .row {
 	display: flex;
-	margin-left: 15%;
+	/* margin-left: 15%; */
 }
 
 .row img {
@@ -208,6 +215,7 @@ nav ul a {
 		$('#userOut').click(function() {
 			location.href = 'userOutReady.mvc';
 		});
+		
 		if('${flag}' == 1){
 			alert('로그인에 실패했습니다');
 			location.href = 'main.mvc';
@@ -287,7 +295,14 @@ nav ul a {
 						상품정보
 					</c:if>
 				</li>
-				<li class="announce">공지사항</li>
+				<li class="announce">
+                <c:if test="${not empty user }">
+                        <a href="boardList.mvc">공지사항</a>
+                </c:if>
+                <c:if test="${empty user }">
+                      		  공지사항
+                </c:if>    
+                </li>
 			</ul>
 			<img class="lens" alt="search" src="img/lens.png">
 		</nav>
@@ -311,7 +326,15 @@ nav ul a {
 							<option value="material">원재료</option>
 					</select></td>
 					<td><input type="text" name="searchValue"></td>
+					
+					<c:if test="${not empty user }">
 					<td><button id="search" type="submit">검색</button></td>
+					</c:if>
+				
+					<c:if test="${empty user}">
+					<td><button id="test" type="reset" onclick="login()">검색</button></td>
+					</c:if>
+					
 				</tr>
 			</table>
 		</form>

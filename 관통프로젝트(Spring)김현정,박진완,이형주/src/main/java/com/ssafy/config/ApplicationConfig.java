@@ -13,12 +13,13 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.ssafy.model.repository.FoodDao;
+import com.ssafy.model.service.BoardService;
 import com.ssafy.model.service.FoodService;
 
 
 @Configuration // 이 파일은 설정파일이라는 의미
 @PropertySource({ "classpath:/config.properties" }) // properties 파일에서 변수처럼 저장해 놓은 값을 읽어와라 
-@ComponentScan(basePackageClasses= {FoodDao.class, FoodService.class}) // Bean 객체 관리요청
+@ComponentScan(basePackageClasses= {FoodDao.class, FoodService.class, BoardService.class}) // Bean 객체 관리요청
 public class ApplicationConfig {
 	//bean을 설정하세요
 	// 객체 관리를 받을 빈 객체를 리턴할 메서드 작성 : 스캔을 할 수 없는 클래스들은 이런 방법을 사용

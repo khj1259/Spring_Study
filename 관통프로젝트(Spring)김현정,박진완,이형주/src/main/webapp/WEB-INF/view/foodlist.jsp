@@ -159,6 +159,13 @@ nav ul a {
 .darkbox input, select{
 	color: white;
 }
+.row{
+	margin-bottom: 15px;
+}
+.contents{
+	width: 80%;
+	margin: 0 auto;
+}
 </style>
 <script>	
 	$(document).ready(function() {
@@ -177,6 +184,24 @@ nav ul a {
 		});
 		$('#userOut').click(function () {
 			location.href = 'userOutReady.mvc';
+		});
+		
+		
+		//추가버튼 클릭 시
+		$('.btAdd').click(function() {
+			//$('.alert').show();
+			var code =  $(this).val();
+			var cnt = prompt('섭취수량을 입력해 주세요');
+			if(cnt != null){
+				$.ajax({
+					url:"eatFoodAdd.mvc",
+					type:"POST",
+					data:"code="+code+"&cnt="+cnt,
+					success:function(){
+						alert('추가되었습니다');
+					}
+				});
+			}
 		});
 		
 	});
@@ -235,7 +260,12 @@ nav ul a {
 		<nav class="logobar">
 			<a href="main.mvc"><img class="logo" alt="logo" src="img/logo.png"></a>
 			<ul>
-				<li class="info_eat">예상 섭취 정보</li>
+				<c:if test="${not empty user }">
+					<a href="expectedIntake.mvc"><li class="info_eat">예상 섭취 정보</li></a>
+				</c:if>
+				<c:if test="${empty user }">
+					<li class="info_eat">예상 섭취 정보</li>
+				</c:if>
 				<li class="info_my">
 					<c:if test="${not empty user }">
 						<a href="eatFoodList.mvc">내 섭취정보</a>
@@ -253,7 +283,14 @@ nav ul a {
 						상품정보
 					</c:if>
 				</li>
-				<li class="announce">공지사항</li>
+				<li class="announce">
+                <c:if test="${not empty user }">
+                        <a href="boardList.mvc">공지사항</a>
+                </c:if>
+                <c:if test="${empty user }">
+                      		  공지사항
+                </c:if>    
+                </li>
 			</ul>
 			<img class="lens" alt="search" src="img/lens.png">
 		</nav>
@@ -295,35 +332,34 @@ nav ul a {
 		<c:forEach items="${list }" var="food" varStatus="idx">
 			<c:choose>
 				<c:when test="${idx.count mod 2 eq 1 }">
+					<div class="row">
 					<div class="col-sm-6">
-						<div class="row item">
+						<div class="item">
 							<div class="col-sm-3"><a href="searchFood.mvc?code=${food.code }" class="thumbnail"><img src="${food.img }"></a></div>
-							<div class="col-sm-8 txt">
+							<div class="col-sm-9 txt">
 								<h3>${food.name }</h3><p>${food.material }</p>
 								<div class="btn-group" role="group">
-									<button type="button" class="btn btn-primary">추가</button>
-									<button type="button" class="btn btn-primary">찜</button><br>
+									<button type="button" class="btn btn-primary btAdd" value="${food.code }">추가</button>
+									<!-- <button type="button" class="btn btn-primary">찜</button><br> -->
 								</div>
 							</div>
 						</div>
 					</div>
 				</c:when>
 				<c:otherwise>
-					<div class="row">
 						<div class="col-sm-6">
-							<div class="row item">
+							<div class="item">
 								<div class="col-sm-3"><a href="searchFood.mvc?code=${food.code }" class="thumbnail"><img src="${food.img }"></a></div>
-								<div class="col-sm-8 txt">
+								<div class="col-sm-9 txt">
 									<h3>${food.name }</h3><p>${food.material }</p>
 									<div class="btn-group" role="group">
-										<button type="button" class="btn btn-primary">추가</button>
-										<button type="button" class="btn btn-primary">찜</button><br>
+										<button type="button" class="btn btn-primary btAdd" value="${food.code }">추가</button>
+										<!-- <button type="button" class="btn btn-primary">찜</button><br> -->
 									</div>
 								</div>
 							</div>
-						
 						</div>
-				</div>		
+					</div>		
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>

@@ -124,4 +124,26 @@ public class FoodController {
 		}
     }
     
+    @RequestMapping("expectedIntake.mvc")
+    public String expectedIntake(Model model,HttpServletRequest req){
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        String id = user.getId();
+        List<MyEatFood> list = fService.expectedIntake(id);
+        
+        double cal = 0;
+        double nat = 0;
+        for(MyEatFood m: list) {
+            int code = m.getCode();
+            int cnt = m.getCnt();
+            cal += cnt*fService.getCal(code);
+            nat += cnt*fService.getNat(code);
+            System.out.println(nat);
+        }
+        
+        model.addAttribute("cal",cal);
+        model.addAttribute("nat",nat);
+        
+        return "expectedIntake";
+    }
 }

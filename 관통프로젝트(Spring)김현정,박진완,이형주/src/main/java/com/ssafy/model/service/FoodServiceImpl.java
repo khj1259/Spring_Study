@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.model.dto.Board;
 import com.ssafy.model.dto.EatFood;
 import com.ssafy.model.dto.Food;
 import com.ssafy.model.dto.MyEatFood;
 import com.ssafy.model.dto.User;
+import com.ssafy.model.repository.BoardDao;
 import com.ssafy.model.repository.FoodDao;
 import com.ssafy.model.repository.UserDao;
 import com.ssafy.util.FoodSaxParser;
@@ -115,5 +117,22 @@ public class FoodServiceImpl implements FoodService {
         return result;
     }
 
+	@Override
+    public List<MyEatFood> expectedIntake(String id) {
+        return dao.selectAllEatFood(id);
+    }
+    
+    @Override
+    public double getCal(int code) {
+        Food f = dao.search(code);
+        return f.getCalory();
+    }
+
+    @Override
+    public double getNat(int code) {
+        Food f = dao.search(code);
+        System.out.println(f.getNatrium());
+        return f.getNatrium();
+    }
 
 }

@@ -44,6 +44,7 @@ public class UserController {
 		if (loginUser != null) {
 			HttpSession session = req.getSession();
 			session.setAttribute("user", loginUser);
+			session.setAttribute("userId", loginUser.getId());
 			return "redirect:foodlist.mvc";
 		} else { // 로그인 실패
 			model.addAttribute("flag", 1);

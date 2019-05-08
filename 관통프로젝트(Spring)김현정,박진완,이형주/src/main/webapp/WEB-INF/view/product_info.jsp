@@ -143,7 +143,7 @@ th {
 					<input style="margin-bottom:5px" type="number" id="cnt">
 					<br>
 					<button type="button" class="btn btn-primary" id="btAdd">추가</button>
-					<button type="button" class="btn btn-primary">찜</button>
+					<!-- <button type="button" class="btn btn-primary">찜</button> -->
 				</div>
 				<br>
 				<div class="col-md-7 col-md-offset-1"> 

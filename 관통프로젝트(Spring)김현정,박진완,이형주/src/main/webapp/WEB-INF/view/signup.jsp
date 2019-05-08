@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,9 +156,6 @@ nav ul a {
 		$('#signup').click(function() {
 			location.href = 'signup.mvc';
 		});
-		/* $('#login').click(function() {
-			location.href = 'signup.html';
-		}); */
 	});
 </script>
 </head>
@@ -193,9 +191,10 @@ nav ul a {
 											id="login_pw">
 									</div>
 									<div class="modal-footer">
+										<input type="button" value="비밀번호찾기" onclick="location.href='searchPassForm.mvc'">
+										<input type="submit" class="btn btn-primary" value="로그인">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">Close</button>
-										<input type="submit" class="btn btn-primary" value="로그인">
 									</div>
 								</form>
 							</div>
@@ -208,11 +207,30 @@ nav ul a {
 			<a href="main.mvc"><img class="logo" alt="logo"
 				src="img/logo.png"></a>
 			<ul>
-				<li class="info_eat">예상 섭취 정보</li>
+				<c:if test="${not empty user }">
+					<a href="expectedIntake.mvc"><li class="info_eat">예상 섭취 정보</li></a>
+				</c:if>
+				<c:if test="${empty user }">
+					<li class="info_eat">예상 섭취 정보</li>
+				</c:if>
 				<li class="info_my">내 섭취정보</li>
 				<li class="info_best">베스트 섭취 정보</li>
-				<li class="info_item"><a href="foodlist.mvc">상품정보</a></li>
-				<li class="announce">공지사항</li>
+				<li class="info_item">
+					<c:if test="${not empty user }">
+						<a href="foodlist.mvc">상품정보</a>
+					</c:if>
+					<c:if test="${ empty user }">
+						상품정보
+					</c:if>
+				</li>
+				<li class="announce">
+                <c:if test="${not empty user }">
+                        <a href="boardList.mvc">공지사항</a>
+                </c:if>
+                <c:if test="${empty user }">
+                      		  공지사항
+                </c:if>    
+                </li>
 			</ul>
 			<img class="lens" alt="search" src="img/lens.png">
 		</nav>

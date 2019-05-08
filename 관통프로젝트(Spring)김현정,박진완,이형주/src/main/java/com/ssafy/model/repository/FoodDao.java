@@ -66,4 +66,5 @@ public interface FoodDao {
 	// 섭취식품 수량 정보 수정
 	public int updateEatFood(EatFood eatFood);
 	
+	public List<Food> expectedIntake(String id);
 }

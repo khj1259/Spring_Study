@@ -88,24 +88,28 @@ public class FoodDaoImpl implements FoodDao {
 
 	@Override
 	public int insertEatFood(EatFood eatFood) {
-		return session.insert("insertEatFood", eatFood);
+		return session.insert(namespace + "insertEatFood", eatFood);
 	}
 
 	@Override
 	public List<MyEatFood> selectAllEatFood(String id) {
-		return session.selectList("selectAllEatFood", id);
+		return session.selectList(namespace + "selectAllEatFood", id);
 	}
 
 	@Override
 	public int deleteEatFood(int eatfoodcode) {
-		return session.delete("deleteEatFood", eatfoodcode);
+		return session.delete(namespace + "deleteEatFood", eatfoodcode);
 	}
 
 	@Override
 	public int updateEatFood(EatFood eatFood) {
-		return session.update("updateEatFood", eatFood);
+		return session.update(namespace + "updateEatFood", eatFood);
 	}
 
+	@Override
+    public List<Food> expectedIntake(String id) {
+        return session.selectList("expectedIntake", id);
+    }
 	
 }
 // SqlSessionTemplate 를 주입받아서, 각함수에 적절한 쿼리문을 호출하도록 구현

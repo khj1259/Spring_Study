@@ -2,6 +2,7 @@ package com.ssafy.model.service;
 
 import java.util.List;
 
+import com.ssafy.model.dto.Board;
 import com.ssafy.model.dto.EatFood;
 import com.ssafy.model.dto.Food;
 import com.ssafy.model.dto.MyEatFood;
@@ -50,6 +51,15 @@ public interface FoodService {
 	
 	// 비밀번호 찾기 - 예외처리 남음
 	public User searchPass(User user);
+	
+	
+	//예상 섭취정보
+    public List<MyEatFood> expectedIntake(String id);
+
+    public double getCal(int code);
+
+    public double getNat(int code);
+	
 	
 	//일단 안씀
 	public List<Food> getFoods();
