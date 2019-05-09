@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.boardMapper">
+	
+	<select id="selectAll" resultType="Board">
+		SELECT * FROM board
+	</select>
+	
+	<insert id="insertboard" parameterType="Board">
+		INSERT INTO board VALUES(0,sysdate(),#{id},#{title},#{content}, 0)
+	</insert>
+	
+	<select id="getboard" resultType="Board" parameterType="int">
+		SELECT * FROM board where bnum=#{bnum}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+        DELETE FROM board WHERE bnum=#{bnum}
+    </delete>
+	
+	<update id="updatehitcount" parameterType="int">
+        UPDATE board SET cnt=cnt+1 WHERE bnum=#{bnum}
+    </update>
+    
+	<update id="updateboard" parameterType="Board">
+        UPDATE board SET title=#{title}, content=#{content}, bdate=sysdate() WHERE bnum=#{bnum}
+    </update>
+	
+</mapper>
+
+<!-- mapper 파일 : sql 문 작성 -->

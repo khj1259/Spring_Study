@@ -1,0 +1,21 @@
+Mapper 파일 헤더
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+설정파일 순서대로 검토
+
+DB 세팅
+DB 생성
+VO 객체에 맞게 테이블 생성 (VO 객체의 멤버변수와 테이블의 컬럼명이 동일해야 작업이 쉽다)
+DTO 정의
+Mapper 파일 껍데기준비
+Mybatis-config 파일위에 위 두개(DTO, Mapper 파일) 등록
+Mapper 파일 몸통 구현
+Repository, Service 인터페이스 및 클래스 구현
+Controller 구현
+
+JSP 페이지 작성
