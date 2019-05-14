@@ -41,5 +41,13 @@ public class BoardDaoImpl implements BoardDao{
 	public Board getBoard(int no) {
 		return session.selectOne(namespace + "getboard",no);
 	}
+	@Override
+    public List<Board> searchByTitle(String searchBoardValue) {
+        return session.selectList(namespace + "searchByTitle", searchBoardValue);
+    }
 
+    @Override
+    public List<Board> searchByAuthor(String searchBoardValue) {
+        return session.selectList(namespace + "searchByAuthor", searchBoardValue);
+    }
 }

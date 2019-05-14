@@ -13,6 +13,8 @@
 		<typeAlias type="com.ssafy.model.dto.User" alias="User"/>
 		<typeAlias type="com.ssafy.model.dto.Board" alias="Board"/>
 		<typeAlias type="com.ssafy.model.dto.MyEatFood" alias="MyEatFood"/>
+		<typeAlias type="com.ssafy.model.dto.WishList" alias="WishList"/>
+		<typeAlias type="com.ssafy.model.dto.UserPrivateInfo" alias="UserPrivateInfo"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/boardMapper.xml"/>

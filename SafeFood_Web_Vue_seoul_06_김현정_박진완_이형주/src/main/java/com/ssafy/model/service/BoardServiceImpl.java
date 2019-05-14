@@ -49,7 +49,15 @@ public class BoardServiceImpl implements BoardService {
 		return board;
 	}
 	
-	
+	@Override
+    public List<Board> searchByTitle(String searchBoardValue) {
+        return boardDao.searchByTitle(searchBoardValue);
+    }
+
+    @Override
+    public List<Board> searchByAuthor(String searchBoardValue) {
+        return boardDao.searchByAuthor(searchBoardValue);
+    }
 	
 	
 }

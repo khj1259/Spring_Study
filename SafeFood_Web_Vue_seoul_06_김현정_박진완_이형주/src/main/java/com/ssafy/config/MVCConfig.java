@@ -29,6 +29,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/");
 		registry.addResourceHandler("/img/**").addResourceLocations("/WEB-INF/img/");
 		registry.addResourceHandler("/xml/**").addResourceLocations("/WEB-INF/xml/");
+		registry.addResourceHandler("/view/**").addResourceLocations("/WEB-INF/view/");
 	} 
 	// 정적자원 접근을 위한 리소스핸들러를 등록함
 	// /WEB-INF/ 폴더는 접근할 수 없기때문에, 접근할 수 있는 방법을 제공함

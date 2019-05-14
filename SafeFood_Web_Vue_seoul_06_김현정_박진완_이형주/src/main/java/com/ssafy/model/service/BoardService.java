@@ -6,13 +6,6 @@ import java.util.List;
 import com.ssafy.model.dto.Board;
 
 public interface BoardService {
-
-//
-	int modifyBoard(Board board) throws SQLException;
-//
-	int deleteBoard(int no) throws SQLException;
-//
-//
 	// 게시판 전체 리스트 조회
 	public List<Board> selectBoardList();
 
@@ -23,6 +16,12 @@ public interface BoardService {
 	int writeBoard(Board board) throws SQLException;
 
 	// 게시글 수정(본인이 쓴것만)
-	// 게시글 삭제(본인이 쓴것만)
+	int modifyBoard(Board board) throws SQLException;
 
+	// 게시글 삭제(본인이 쓴것만)
+	int deleteBoard(int no) throws SQLException;
+	
+	//게시글 검색
+    public List<Board> searchByTitle(String searchBoardValue);
+    public List<Board> searchByAuthor(String searchBoardValue);
 }

@@ -12,4 +12,6 @@ public interface BoardDao {
 	public int updateHitCount(int no);
 	public int deleteBoard(int no);
 	public Board getBoard(int no);
+	public List<Board> searchByTitle(String searchBoardValue);
+    public List<Board> searchByAuthor(String searchBoardValue);
 }

@@ -27,7 +27,13 @@
 	<update id="updateboard" parameterType="Board">
         UPDATE board SET title=#{title}, content=#{content}, bdate=sysdate() WHERE bnum=#{bnum}
     </update>
-	
+	<select id="searchByTitle" parameterType="String" resultType="Board">
+   	 	SELECT * FROM board WHERE title LIKE CONCAT('%',#{searchBoardValue},'%')
+    </select>
+    
+    <select id="searchByAuthor" parameterType="String" resultType="Board">
+    	SELECT * FROM board WHERE id LIKE CONCAT('%',#{searchBoardValue},'%')
+    </select>
 </mapper>
 
 <!-- mapper 파일 : sql 문 작성 -->

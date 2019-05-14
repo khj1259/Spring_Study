@@ -1,6 +1,7 @@
 package com.ssafy.model.repository;
 
 import com.ssafy.model.dto.User;
+import com.ssafy.model.dto.UserPrivateInfo;
 
 public interface UserDao {
 	
@@ -23,4 +24,10 @@ public interface UserDao {
 	
 	public User searchID(String id);
 	
+	public int signUpInfo(UserPrivateInfo userInfo);
+
+    public UserPrivateInfo getUserId(String id);
+
+    //추가 정보 수정
+	public void modifyInfo(String id, String gender, String height, String weight, String age, String checkActivity);
 }

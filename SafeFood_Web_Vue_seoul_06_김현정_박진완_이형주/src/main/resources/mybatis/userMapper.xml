@@ -36,6 +36,21 @@
         DELETE FROM user WHERE id=#{id} AND password=#{password}
     </delete>
 	
+		<insert id="signupinfo" parameterType="UserPrivateInfo">
+		INSERT INTO userprivateinfo VALUES(#{id},#{gender},#{height},#{weight},#{age},#{checkActivity})
+		</insert>
+	
+
+	<select id="searchUserInfo" parameterType="String" resultType="UserPrivateInfo">
+		SELECT * FROM userprivateinfo WHERE id=#{id} 
+	</select>
+	
+	<update id="modifyinfo" parameterType="UserPrivateInfo">
+        UPDATE userprivateinfo SET gender=#{gender}, height=#{height},weight=#{weight},age=#{age},checkActivity=#{checkActivity} WHERE id=#{id}
+    </update>
+	
+	
+	
 </mapper>
 
 <!-- mapper 파일 : sql 문 작성 -->

@@ -12,340 +12,64 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-function login(){
-	alert('로그인 후 조회 가능합니다');
-}
-</script>
-
-<title>Insert title here</title>
+<title>Safe Food</title>
 <style type="text/css">
-nav.blackbar {
-	list-style: none;
-	background-color: black;
-	padding: 5px;
-	height: 40px;
-	border: none;
-}
-
-.blackbar ul {
-	float: right;
-	margin: 1px;
-}
-
-.blackbar ul li {
-	display: inline-block;
-	padding-left: 20px;
-	padding-right: 20px;
-	margin: 2px;
-}
-
-.blackbar ul li button {
-	background-color: #555;
-	color: white;
-	border: none;
-	border-radius: 10px;
-	height: 25px;
-	width: 80px;
-}
-
-header img {
-	margin-left: 30px;
-	margin-top: 10px;
-	height: 40px;
-	width: 60px;
-}
-
-.logobar {
-	display: flex;
-}
-
-.logobar ul {
-	margin-top: 20px;
-	margin-left: 100px;
-}
-
-.logobar ul li {
-	float: right;
-	list-style-type: none;
-	padding-left: 20px;
-	padding-right: 20px;
-}
-
-.logobar .logo {
-	height: 50px;
-	width: 70px;
-}
-
-.logobar .lens {
-	height: 20px;
-	width: 20px;
-	background-color: gray;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-left: 25px;
-	padding-right: 5px;
-	border-radius: 20px;
-	margin-top: 15px;
-}
-
-.graybox {
-	background-color: gray;
-	color: white;
+img{
 	width: 100%;
-	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-	margin-top: 10px;
 }
-
-.darkbox {
-	background-color: #4d4d4d;
-	color: gray;
-	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-
-.darkbox table {
-	margin: 0 auto;
-}
-
-.darkbox table tr input, table select {
-	border-radius: 3px;
-	background-color: gray;
-	border: none;
-	height: 20px;
-}
-
-.darkbox table td {
-	text-align: left;
-	padding-left: 5px;
-	padding-right: 5px;
-	color: #999999
-}
-
-.darkbox table button {
-	background-color: #0099ff;
-	color: white;
-	border-radius: 3px;
-	width: 60px;
-	height: 20px;
-	border: none;
-}
-
-.container {
-	/* display: inline-block; */
-	padding-top: 100px;
-}
-
-.row {
-	display: flex;
-	/* margin-left: 15%; */
-}
-
-.row img {
-	height: 200px;
-	width: 220px;
-}
-
-.row .data {
-	height: 300px;
-	width: 70%;
-}
-
-.row .data a {
-	text-decoration: none;
-}
-
-.row button {
-	height: 20px;
-	width: 50px;
-	border: none;
-	border-radius: 5px;
-	background-color: #4db8ff;
-	color: white;
-}
-
-footer a {
-	text-decoration: none;
-	color: #0099ff;
-}
-
-footer div {
-	margin-left: 10px;
-	margin-bottom: 10px;
-}
-
-footer div img {
-	margin-right: 15px;
-}
-
-footer .bottombar {margin-left = 0;margin-right = 0;
-	width: 120%;
-	height: 20px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	background-color: #ddd;
-	text-align: center;
-}
-
-nav ul a {
-	color: black;
-}
-
-.darkbox input, select {
-	color: white;
+.item{
+	height: 500px;
 }
 </style>
-<script type="text/javascript">
-	$(function() {
-		$('#userinfo').click(function() {
-			location.href = 'userInfo.mvc';
-		});
-		$('#logout').click(function() {
-			location.href = 'logout.mvc';
-		});
-		$('#signup').click(function() {
-			location.href = 'signup.mvc';
-		});
-		$('#search').click(function() {
-			location.href = 'search_result.mvc';
-		});
-		$('#userOut').click(function() {
-			location.href = 'userOutReady.mvc';
-		});
-		
-		if('${flag}' == 1){
-			alert('로그인에 실패했습니다');
-			location.href = 'main.mvc';
-		}
-	});
-</script>
 </head>
 <body>
-	<header>
-		<nav class="blackbar">
-			<ul>
-				<c:if test="${empty user }">
-					<li><button id="signup">Sign up</button></li>
-					<li><button type="button" data-toggle="modal"
-							data-target="#exampleModal">Login</button></li>
-					<div class="modal fade" id="exampleModal" tabindex="-1"
-						role="dialog" aria-labelledby="exampleModalLabel"
-						aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">Login</h5>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<form method="post" action="login.mvc">
-										<div class="form-group">
-											<label for="id" class="form-control-label">ID</label> <input
-												type="text" class="form-control" name="id"
-												id="login_id">
-										</div>
-										<div class="form-group">
-											<label for="password" class="form-control-label">PASSWORD</label>
-											<input type="password" class="form-control" name="password"
-												id="login_pw">
-										</div>
-										<div class="modal-footer">
-											<input type="button" value="비밀번호찾기" onclick="location.href='searchPassForm.mvc'">
-											<input type="submit" class="btn btn-primary" value="로그인">
-											<button type="button" class="btn btn-secondary"
-												data-dismiss="modal">Close</button>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</c:if>
-				<c:if test="${not empty user }">
-					<li><button id="logout">Logout</button></li>
-					<li><button id="userinfo">회원정보</button></li>
-				</c:if>
-			</ul>
-		</nav>
-		<nav class="logobar">
-			<a href="main.mvc"><img class="logo" alt="logo"
-				src="img/logo.png"></a>
-			<ul>
-				<c:if test="${not empty user }">
-					<a href="expectedIntake.mvc"><li class="info_eat">예상 섭취 정보</li></a>
-				</c:if>
-				<c:if test="${empty user }">
-					<li class="info_eat">예상 섭취 정보</li>
-				</c:if>
-				<li class="info_my">
-					<c:if test="${not empty user }">
-						<a href="eatFoodList.mvc">내 섭취정보</a>
-					</c:if>
-					<c:if test="${empty user }">
-						내 섭취 정보
-					</c:if>
-				</li>
-				<li class="info_best">베스트 섭취 정보</li>
-				<li class="info_item">
-					<c:if test="${not empty user }">
-						<a href="foodlist.mvc">상품정보</a>
-					</c:if>
-					<c:if test="${empty user }">
-						상품정보
-					</c:if>
-				</li>
-				<li class="announce">
-                <c:if test="${not empty user }">
-                        <a href="boardList.mvc">공지사항</a>
-                </c:if>
-                <c:if test="${empty user }">
-                      		  공지사항
-                </c:if>    
-                </li>
-			</ul>
-		</nav>
-	</header>
-	<div class="graybox">
-		<h3>WHAT WE PROVIDE</h3>
-		<h5>건강한 삶을 위한 먹거리 프로젝트</h5>
-	</div>
-	<div class="darkbox">
-		<form action="search_result.mvc" method="get">
-			<table>
-				<tr>
-					<td>검색조건</td>
-					<td>검색단어</td>
-					<td>&nbsp</td>
-				</tr>
-				<tr>
-					<td><select name="search_opt">
-							<option value="name">식품명</option>
-							<option value="maker">제조사</option>
-							<option value="material">원재료</option>
-					</select></td>
-					<td><input type="text" name="searchValue"></td>
-					
-					<c:if test="${not empty user }">
-					<td><button id="search" type="submit">검색</button></td>
-					</c:if>
-				
-					<c:if test="${empty user}">
-					<td><button id="test" type="reset" onclick="login()">검색</button></td>
-					</c:if>
-					
-				</tr>
-			</table>
-		</form>
+<%@include file="topmenu.jsp" %>
+    <!-- carousel -->
+    <div id="carousel-example-generic" class="carousel slide"
+        data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0"
+                class="active"></li>
+            <li data-target="#carousel-example-generic"  data-slide-to="1">
+            <a href="searchFood.mvc?code=2"></a>
+            </li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="img/진짜쫄면.jpg" alt="...">
+                <div class="carousel-caption"></div>
+            </div>
+            <div class="item">
+                <img src="img/진라면.jpg" onclick="location.href='searchFood.mvc?code=2'" alt="...">
+                <div class="carousel-caption"></div>
+            </div>
+            <div class="item">
+                <img src="img/우유.jpg" onclick="location.href='searchFood.mvc?code=12'" alt="...">
+                <div class="carousel-caption"></div>
+            </div>
+            <div class="item">
+                <img src="img/서울우유.PNG" onclick="location.href='searchFood.mvc?code=11'" alt="...">
+                <div class="carousel-caption"></div>
+            </div>
+        </div>
+		<!-- Controls -->
+		<a class="left carousel-control" href="#carousel-example-generic"
+			role="button" data-slide="prev"> <span
+			class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span
+			class="sr-only">Previous</span>
+		</a> <a class="right carousel-control" href="#carousel-example-generic"
+			role="button" data-slide="next"> <span
+			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
 	</div>
 	<!-- contents -->
 	<div class="container">
-		<div class="row">
+		<%-- <div class="row">
 			<div>
 				<img alt="" src="img/칸타타아메리카노.jpg">
 			</div>
@@ -380,25 +104,9 @@ nav ul a {
 				</c:if>
 			</div>
 
-		</div>
+		</div> --%>
 	</div>
 	<!-- contents end -->
-
-	<footer>
-		<h3>Find us</h3>
-		<hr>
-		<div>
-			<img alt="pin" src="img/pin.png" style="height: 25px; width: 20px;">(SSAFY)서울시
-			강남구 테헤란로 멀티스퀘어
-		</div>
-		<div>
-			<img alt="phone" src="img/phone.png"
-				style="height: 25px; width: 20px;">1544-9001
-		</div>
-		<div>
-			<img alt="mail" src="img/mail.png" style="height: 25px; width: 25px;"><a
-				href="#">admin@ssafy.com</a>
-		</div>
-	</footer>
+<%@ include file="bottom.jsp" %>
 </body>
 </html>

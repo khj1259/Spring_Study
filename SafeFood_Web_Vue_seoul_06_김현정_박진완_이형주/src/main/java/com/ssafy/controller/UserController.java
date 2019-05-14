@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ssafy.model.dto.User;
+import com.ssafy.model.dto.UserPrivateInfo;
 import com.ssafy.model.service.FoodService;
 
 @Controller // 앞에 @Controller 붙인 클래스는 디스페처가 받은 요청을 처리할 페이지를 결정해주는 클래스
@@ -25,11 +26,26 @@ public class UserController {
 
 	// 회원가입
 	@RequestMapping(value = "signup.mvc", method = RequestMethod.POST)
-	public String signup(User user, String[] check) {
+	public String signup(User user, String[] check, UserPrivateInfo userInfo) {
 		String allergy = String.join(",", check);
 		user.setAllergy(allergy);
+		
+		if(userInfo.getGender().isEmpty()) {
+			userInfo.setGender("");
+		}
+		if(userInfo.getHeight().isEmpty()) {
+			userInfo.setHeight("");
+		}
+		if(userInfo.getWeight().isEmpty()) {
+			userInfo.setWeight("");
+		}
+		if(userInfo.getCheckActivity().isEmpty()) {
+			userInfo.setCheckActivity("");
+		}
+		
 		int result = fService.addUser(user);
 		if (result == 1) { // 정상 처리
+			fService.addUserInfo(userInfo);
 			return "redirect:main.mvc";
 		} else {
 			System.out.println("회원가입 실패 처리 해야함");
@@ -43,8 +59,10 @@ public class UserController {
 		User loginUser = fService.signIn(user);
 		if (loginUser != null) {
 			HttpSession session = req.getSession();
+			UserPrivateInfo UserPrivateInfo = fService.getUser(user.getId());
 			session.setAttribute("user", loginUser);
 			session.setAttribute("userId", loginUser.getId());
+			session.setAttribute("UserPrivateInfo", UserPrivateInfo);
 			return "redirect:foodlist.mvc";
 		} else { // 로그인 실패
 			model.addAttribute("flag", 1);
@@ -110,16 +128,22 @@ public class UserController {
 	// 회원 정보 수정 완료
 	@RequestMapping("userInfoEditComplete.mvc")
 	public String userInfoEditComplete(HttpServletRequest req, String password, String password2, String name,
-			String address, String phone, String[] check, Model model) {
+			String address, String phone, String[] check, Model model, UserPrivateInfo UserPrivateInfo ) {
 		HttpSession session = req.getSession();
 		User user = (User) session.getAttribute("user");
 		String id = user.getId();
 		String allergy = String.join(",", check);
-		System.out.println(allergy);
+	
 		if (password.equals(password2)) {
 			fService.modifyUser(id, password2, name, address, phone, allergy);
+			System.out.println("user 수정");
+			fService.modifyUserInfo(id, UserPrivateInfo.getGender(),UserPrivateInfo.getHeight() , UserPrivateInfo.getWeight(), UserPrivateInfo.getAge(), UserPrivateInfo.getCheckActivity());
+		
 			User newUser = new User(id, password2, name, address, phone, allergy);
+			UserPrivateInfo newUserPrivateInfo = new UserPrivateInfo(id,UserPrivateInfo.getGender(),UserPrivateInfo.getHeight() , UserPrivateInfo.getWeight(), UserPrivateInfo.getAge(), UserPrivateInfo.getCheckActivity());
+			System.out.println(newUserPrivateInfo.toString());
 			session.setAttribute("user", newUser);
+			session.setAttribute("UserPrivateInfo", newUserPrivateInfo);
 			return "main";
 		} else {
 			model.addAttribute("errorInfo", "비밀번호가 틀렸습니다");

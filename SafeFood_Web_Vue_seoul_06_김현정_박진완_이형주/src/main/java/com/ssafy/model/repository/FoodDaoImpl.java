@@ -10,6 +10,7 @@ import com.ssafy.model.dto.EatFood;
 import com.ssafy.model.dto.Food;
 import com.ssafy.model.dto.FoodPageBean;
 import com.ssafy.model.dto.MyEatFood;
+import com.ssafy.model.dto.WishList;
 
 // 인터페이스를 구현한 클래스
 @Repository
@@ -17,26 +18,8 @@ public class FoodDaoImpl implements FoodDao {
 	@Autowired
 	private SqlSession session;
 	
-//	private static FoodDaoImpl instance; // 인스턴스를 하나만 생성해서 사용하자
-//	public static FoodDaoImpl getInstance() {
-//		if(instance == null) {
-//			instance = new FoodDaoImpl();
-//		}
-//		return instance;
-//	}
-	
 	private static final String namespace = "mybatis.foodMapper."; // .까지 문자열로 준비
 	
-	// selectAll 을 부르려면 풀네임 mybatis.productMapper.selectAll 로 표현할 수 있다	
-//	public List<Product> selectAll() {
-//		return session.selectList(namespace+"selectAll");
-//	}
-//	
-//	public int insert(Product product) {
-//		return session.insert(namespace + "insert", product);
-//	}
-	////////////////////////////////////////////////////////////////////////////////////
-
 	@Override
 	public void loadData() {
 		// TODO Auto-generated method stub
@@ -107,8 +90,28 @@ public class FoodDaoImpl implements FoodDao {
 	}
 
 	@Override
-    public List<Food> expectedIntake(String id) {
-        return session.selectList("expectedIntake", id);
+	public int insertwishList(WishList wishList) {
+		return session.insert(namespace + "insertWishList", wishList);
+	}
+
+	@Override
+	public List<MyEatFood> selectAllWishList(String id) {
+		return session.selectList(namespace + "selectAllWishList", id);
+	}
+
+	@Override
+	public int deleteWishList(int wishcode) {
+		return session.delete(namespace + "deleteWishList", wishcode);
+	}
+
+	@Override
+	public int updateWishList(WishList wishList) {
+		return session.update(namespace + "updateWishList", wishList);
+	}
+	
+	@Override
+    public List<MyEatFood> bestEatFood(){
+        return session.selectList(namespace+"selectBest");
     }
 	
 }

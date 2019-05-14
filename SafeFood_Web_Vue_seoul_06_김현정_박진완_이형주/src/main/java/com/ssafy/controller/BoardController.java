@@ -55,4 +55,14 @@ public class BoardController {
 		bService.modifyBoard(board);
 		return "redirect:boardList.mvc";
 	}
+	//제목, 작성자
+    @RequestMapping("search_boardresult.mvc")
+   public String search_result(String search_opt, String searchBoardValue, Model model) {
+        if(search_opt.equals("title")) {
+            model.addAttribute("boardlist", bService.searchByTitle(searchBoardValue));
+        }else if(search_opt.equals("author")) {
+            model.addAttribute("boardlist", bService.searchByAuthor(searchBoardValue));
+        }
+       return "boardsearch_result";
+   }
 }

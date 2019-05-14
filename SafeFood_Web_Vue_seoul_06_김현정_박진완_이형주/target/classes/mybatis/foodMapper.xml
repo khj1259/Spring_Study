@@ -24,6 +24,7 @@
 		SELECT * FROM food WHERE material LIKE CONCAT('%',#{searchValue},'%')
 	</select>
 	
+	<!-- 섭취식품 -->
 	<insert id="insertEatFood" parameterType="EatFood">
 		INSERT INTO eatfood VALUES(0,#{id},#{code},#{cnt})
 	</insert>
@@ -42,6 +43,33 @@
 		UPDATE eatfood SET cnt=#{cnt} WHERE eatfoodcode=#{eatfoodcode}
 	</update>
 	
+	<!-- 찜 -->
+	<insert id="insertWishList" parameterType="WishList">
+		INSERT INTO wishlist VALUES(0,#{id},#{code},#{cnt})
+	</insert>
+	
+	<select id="selectAllWishList" parameterType="String" resultType="MyEatFood">
+		SELECT B.code, B.img, B.name, A.cnt, A.wishcode
+		FROM wishlist A INNER JOIN food B USING(code) 
+		WHERE id=#{id};
+	</select>
+	
+	<delete id="deleteWishList" parameterType="int">
+		DELETE FROM wishlist WHERE wishcode=#{wishcode}
+	</delete>
+	
+	<update id="updateWishList" parameterType="WishList">
+		UPDATE wishlist SET cnt=#{cnt} WHERE wishcode=#{wishcode}
+	</update>
+	
+	<!-- 베스트 섭취정보 -->
+	<select id="selectBest" resultType="MyEatFood">
+		SELECT B.code, B.img, B.name, sum(A.cnt) as cnt, A.eatfoodcode
+		FROM eatfood A INNER JOIN food B using(code)
+		GROUP BY B.code
+		ORDER BY cnt DESC
+		LIMIT 5;
+	</select>
 </mapper>
 
 <!-- mapper 파일 : sql 문 작성 -->

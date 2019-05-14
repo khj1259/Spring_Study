@@ -15,64 +15,6 @@
 <title>QnA 게시판</title>
 </head>
 <style type="text/css">
-nav.blackbar {
-    list-style: none;
-    background-color: black;
-    padding: 5px;
-    height: 40px;
-    border: none;
-}
-.blackbar ul {
-    float: right;
-    margin: 1px;
-}
-.blackbar ul li {
-    display: inline-block;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 2px;
-}
-.blackbar ul li button {
-    background-color: #555;
-    color: white;
-    border-radius: 10px;
-    height: 25px;
-    width: 80px;
-}
-header img {
-    margin-left: 30px;
-    margin-top: 10px;
-    height: 40px;
-    width: 60px;
-}
-.logobar {
-    display: flex;
-}
-.logobar ul {
-    margin-top: 20px;
-    margin-left: 100px;
-}
-.logobar ul li {
-    float: right;
-    list-style-type: none;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-.logobar .logo {
-    height: 50px;
-    width: 70px;
-}
-.logobar .lens {
-    height: 20px;
-    width: 20px;
-    background-color: gray;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 25px;
-    padding-right: 5px;
-    border-radius: 20px;
-    margin-top: 15px;
-}
 .graybox {
     background-color: gray;
     color: white;
@@ -107,33 +49,6 @@ header img {
     color: white;
     border-radius: 3px;
     width: 60px;
-}
-footer{
-    clear: both;
-}
-footer a {
-    text-decoration: none;
-    color: #0099ff;
-}
-footer div {
-    margin-left: 10px;
-}
-footer div img {
-    margin-right: 15px;
-}
-.contents img {
-    width: 200px;
-    height: 200px;
-}
-.txt {
-    background-color: #F6F6F6;
-}
-.item {
-    margin-bottom: 10px;
-    margin-right: 10px;
-}
-nav ul a {
-    color: black;
 }
 .darkbox input, select{
     color: white;
@@ -173,52 +88,7 @@ nav ul a {
 }
 </style>
 <body>
-<header>
-        <nav class="blackbar">
-            <ul>
-                <c:if test="${not empty user }">
-                    <li><button id="logout">Logout</button></li>
-                    <li><button id="userinfo">회원정보</button></li>
-                </c:if>
-            </ul>
-        </nav>
-        <nav class="logobar">
-            <a href="main.mvc"><img class="logo" alt="logo" src="img/logo.png"></a>
-            <ul>
-                    <c:if test="${not empty user }">
-                        <a href="expectedIntake.mvc"><li class="info_eat">예상 섭취 정보</li></a>
-                    </c:if>
-                    <c:if test="${empty user }">
-                        <li class="info_eat">예상 섭취 정보</li>
-                    </c:if>
-                <li class="info_my">
-                    <c:if test="${not empty user }">
-                        <a href="eatFoodList.mvc">내 섭취정보</a>
-                    </c:if>
-                    <c:if test="${empty user }">
-                        내 섭취정보
-                    </c:if>
-                </li>
-                <li class="info_best">베스트 섭취 정보</li>
-                <li class="info_item">
-                    <c:if test="${not empty user }">
-                        <a href="foodlist.mvc">상품정보</a>
-                    </c:if>
-                    <c:if test="${empty user }">
-                        상품정보
-                    </c:if>
-                </li>
-                <li class="announce">
-                <c:if test="${not empty user }">
-                        <a href="boardList.mvc">공지사항</a>
-                </c:if>
-                <c:if test="${empty user }">
-                              공지사항
-                </c:if>    
-                </li>
-            </ul>
-        </nav>
-    </header>
+<%@include file="topmenu.jsp" %>
     <div class="graybox">
         <h3>WHAT WE PROVIDE</h3>
         <h5>건강한 삶을 위한 먹거리 프로젝트</h5>
@@ -279,31 +149,7 @@ nav ul a {
         </form>
     </section>
     </div>
-    
-    <footer>
-        <h3>Find us</h3>
-        <hr>
-        <div>
-            <img alt="pin" src="img/pin.png" style="height: 25px; width: 20px;">(SSAFY)서울시 강남구 테헤란로 멀티스퀘어
-        </div>
-        <div>
-            <img alt="phone" src="img/phone.png" style="height: 25px; width: 20px;">1544-9001
-        </div>
-        <div>
-            <img alt="mail" src="img/mail.png" style="height: 25px; width: 25px;"><a href="#">admin@ssafy.com</a>
-        </div>
-    </footer>
-    
-    <script type="text/javascript">
-    $(function() {
-        $('#userinfo').click(function() {
-            location.href = 'userInfo.mvc';
-        });
-        $('#logout').click(function() {
-            location.href = 'logout.mvc';
-        });
-    });
-    </script>
+ <%@ include file="/WEB-INF/view/bottom.jsp" %>
 </body>
 </html>
 <!--  readonly 값을 바꿀수 없는것  -->
