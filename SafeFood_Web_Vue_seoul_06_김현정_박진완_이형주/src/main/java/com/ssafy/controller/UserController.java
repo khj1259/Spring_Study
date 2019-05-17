@@ -26,30 +26,32 @@ public class UserController {
 
 	// 회원가입
 	@RequestMapping(value = "signup.mvc", method = RequestMethod.POST)
-	public String signup(User user, String[] check, UserPrivateInfo userInfo) {
+	public String signup(User user, String[] check, UserPrivateInfo userInfo, Model model) {
 		String allergy = String.join(",", check);
 		user.setAllergy(allergy);
-		
-		if(userInfo.getGender().isEmpty()) {
+
+		if (userInfo.getGender().isEmpty()) {
 			userInfo.setGender("");
 		}
-		if(userInfo.getHeight().isEmpty()) {
+		if (userInfo.getHeight().isEmpty()) {
 			userInfo.setHeight("");
 		}
-		if(userInfo.getWeight().isEmpty()) {
+		if (userInfo.getWeight().isEmpty()) {
 			userInfo.setWeight("");
 		}
-		if(userInfo.getCheckActivity().isEmpty()) {
+		if (userInfo.getCheckActivity().isEmpty()) {
 			userInfo.setCheckActivity("");
 		}
-		
-		int result = fService.addUser(user);
-		if (result == 1) { // 정상 처리
-			fService.addUserInfo(userInfo);
-			return "redirect:main.mvc";
+		boolean checkUser = fService.checkUser(user);
+		// 아이디 체크
+		System.out.println("check user "+checkUser);
+		if (!checkUser) {
+				int result = fService.addUser(user);
+				fService.addUserInfo(userInfo);
+				return "redirect:main.mvc";
 		} else {
-			System.out.println("회원가입 실패 처리 해야함");
-			return "redirect:signup.mvc";
+			model.addAttribute("flag2", 1);
+			return "signup";
 		}
 	}
 
@@ -99,24 +101,21 @@ public class UserController {
 		User user2 = (User) session.getAttribute("user");
 		System.out.println(user2.toString());
 		user.setId(user2.getId());
-		
+
 		int result = fService.deleteUser(user);
 		System.out.println(result);
-		if(result != 0) { // 성공
+		if (result != 0) { // 성공
 			session.setAttribute("user", "");
 			return "redirect:main.mvc";
-		}else {
+		} else {
 			System.out.println("탈퇴 실패");
 			model.addAttribute("error", "비밀번호를 제대로 입력해주세요!");
 			return "userOut";
 		}
 		/*
-		 * 외래키 삭제시 제약조건 추가를 위해서 아래 쿼리문 실행 해야 함 워크벤치에서
-		ALTER TABLE eatfood
-		ADD CONSTRAINT fk_eatfood
-		FOREIGN KEY (id) REFERENCES user(id) 
-		ON delete CASCADE;
-		*/
+		 * 외래키 삭제시 제약조건 추가를 위해서 아래 쿼리문 실행 해야 함 워크벤치에서 ALTER TABLE eatfood ADD CONSTRAINT
+		 * fk_eatfood FOREIGN KEY (id) REFERENCES user(id) ON delete CASCADE;
+		 */
 	}
 
 	// 회원 정보 수정페이지
@@ -128,19 +127,22 @@ public class UserController {
 	// 회원 정보 수정 완료
 	@RequestMapping("userInfoEditComplete.mvc")
 	public String userInfoEditComplete(HttpServletRequest req, String password, String password2, String name,
-			String address, String phone, String[] check, Model model, UserPrivateInfo UserPrivateInfo ) {
+			String address, String phone, String[] check, Model model, UserPrivateInfo UserPrivateInfo) {
 		HttpSession session = req.getSession();
 		User user = (User) session.getAttribute("user");
 		String id = user.getId();
 		String allergy = String.join(",", check);
-	
+
 		if (password.equals(password2)) {
 			fService.modifyUser(id, password2, name, address, phone, allergy);
 			System.out.println("user 수정");
-			fService.modifyUserInfo(id, UserPrivateInfo.getGender(),UserPrivateInfo.getHeight() , UserPrivateInfo.getWeight(), UserPrivateInfo.getAge(), UserPrivateInfo.getCheckActivity());
-		
+			fService.modifyUserInfo(id, UserPrivateInfo.getGender(), UserPrivateInfo.getHeight(),
+					UserPrivateInfo.getWeight(), UserPrivateInfo.getAge(), UserPrivateInfo.getCheckActivity());
+
 			User newUser = new User(id, password2, name, address, phone, allergy);
-			UserPrivateInfo newUserPrivateInfo = new UserPrivateInfo(id,UserPrivateInfo.getGender(),UserPrivateInfo.getHeight() , UserPrivateInfo.getWeight(), UserPrivateInfo.getAge(), UserPrivateInfo.getCheckActivity());
+			UserPrivateInfo newUserPrivateInfo = new UserPrivateInfo(id, UserPrivateInfo.getGender(),
+					UserPrivateInfo.getHeight(), UserPrivateInfo.getWeight(), UserPrivateInfo.getAge(),
+					UserPrivateInfo.getCheckActivity());
 			System.out.println(newUserPrivateInfo.toString());
 			session.setAttribute("user", newUser);
 			session.setAttribute("UserPrivateInfo", newUserPrivateInfo);
@@ -156,7 +158,7 @@ public class UserController {
 	public String searchPassword(User user, Model model, HttpServletRequest req) {
 		User result = fService.searchPass(user);
 		String pass = "";
-		if (result==null) {
+		if (result == null) {
 			pass = "비밀번호를 찾을 수 없습니다 , 정보를 다시 입력해 주세요";
 		} else {
 			pass = "비밀번호는 " + result.getPassword() + " 입니다!";

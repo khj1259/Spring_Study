@@ -169,4 +169,32 @@ public class FoodServiceImpl implements FoodService {
 			String checkActivity) {
 	userDao.modifyInfo(id,gender,height, weight, age, checkActivity);
 	}
+	@Override
+    public double getCarbo(int code) {
+         Food f = dao.search(code);
+            return f.getCarbo();
+    }
+
+    @Override
+    public double getProtein(int code) {
+         Food f = dao.search(code);
+            return f.getProtein();
+    }
+
+    @Override
+    public double getFat(int code) {
+         Food f = dao.search(code);
+            return f.getFat();
+    }
+
+	@Override
+	public boolean checkUser(User user) {
+		User u = userDao.searchID(user.getId());
+		if(u==null) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	
 }

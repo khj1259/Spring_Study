@@ -38,8 +38,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User searchID(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne(namespace + "searchID", id);
 	}
 
 	@Override

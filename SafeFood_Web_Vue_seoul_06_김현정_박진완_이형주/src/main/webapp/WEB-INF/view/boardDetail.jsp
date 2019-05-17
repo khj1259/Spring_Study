@@ -15,54 +15,16 @@
 <title>게시물 상세보기</title>
 </head>
 <style type="text/css">
-.graybox {
-    background-color: gray;
-    color: white;
-    width: 100%;
-    text-align: center;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    margin-top: 10px;
-}
-.darkbox {
-    background-color: #4d4d4d;
-    color: gray;
-    text-align: center;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-.darkbox table {
-    margin: 0 auto;
-}
-.darkbox table tr input, table select {
-    border-radius: 3px;
-    background-color: gray;
-}
-.darkbox table td {
-    text-align: left;
-    padding-left: 5px;
-    padding-right: 5px;
-    color: #999999
-}
-.darkbox table button {
-    background-color: #0099ff;
-    color: white;
-    border-radius: 3px;
-    width: 60px;
-}
-.darkbox input, select{
-    color: white;
-}
 #input{
-    font-style:inherit;
+ /*    font-style:inherit;
     font-size:40px;
-    border-style: none;
+    border-style: none; */
+       width:50%;
+    margin: 0 auto;
 }
 #titleField{
-    text-align:center;
-    width: 50%;
+    width: 100%;
     margin: 0 auto;
-    
 }
 #infoField{
     width: 50%;
@@ -70,9 +32,10 @@
     margin: 0 auto;
 }
 #textField{
-    width: 50%;
+    width: 100%;
+    height: 400px;
+    text-align:left;
     margin: 0 auto;
-    display:block;
 }
 #checkButton{
     width :80px;
@@ -91,79 +54,78 @@
     width : 250px;
     margin: 0 auto;
 }
+.header_img{
+    width: 100%;
+    height: 242px;
+    background-image: url("img/배경2.PNG");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+#input{
+    width:50%;
+    margin: 0 auto;
+}
+#inside{
+    height: auto;
+    border:2px solid;
+    width:100%;
+    padding:20px;
+    margin-top: 20px;
+}
 </style>
 <body>
     <%@include file="topmenu.jsp" %>
-    <div class="graybox">
-        <h3>WHAT WE PROVIDE</h3>
-        <h5>건강한 삶을 위한 먹거리 프로젝트</h5>
-    </div>
-    <div class="darkbox">
-        <form action="search_result.mvc" method="get">
-            <table>
-                <tr>
-                    <td>검색조건</td>
-                    <td>검색단어</td>
-                    <td>&nbsp</td>
-                </tr>
-                <tr>
-                    <td>
-                        <select name="search_opt">
-                            <option value="name">식품명</option>   
-                            <option value="maker">제조사</option>  
-                            <option value="material">원재료</option>   
-                        </select>
-                    </td>
-                    <td><input type="text" name="searchValue"></td>
-                    <td><button id="search" type="submit">검색</button></td>
-                </tr>
-            </table>
-        </form>
-    </div>
-    
-    
-    <div class="contents">
-    <br>
-    <table class="table table-hover">
-    <section>
-        <form method="post">
-            <fieldset id ="titleField">
-            <legend>
-            <input type="text" id="input" name="bnum" value="${board.bnum}" readonly="readonly" size="2"><input type="text" id="input" name="title" value="${board.title }">
-            </legend>
-            </fieldset>
-            
-            <fieldset id="infoField">
-            <legend>
-            조회수  : ${board.cnt} 작성날짜: ${board.bdate}
-            </legend>
-            </fieldset>
-            <br>
-            <br>
-            
-            <textarea rows="30" cols="100" name="content" id="textField">${board.content}</textarea><br>
-            <div id="buttondiv">        
-            <input type="button" id="checkButton" value="확인" onclick="location.href='${pageContext.request.contextPath}/boardList.mvc'"/>
-            
-            
-            <c:if test="${sessionScope.userId eq board.id}">
-            <c:if test="${sessionScope.userId!='admin'}">
-            <input type="submit" id="modifyButton" value="수정" formaction="${pageContext.request.contextPath}/boardModify.mvc"/>
-            <input type="submit" id="deleteButton" value="삭제" formaction="${pageContext.request.contextPath}/boardDelete.mvc"/>
-            </c:if>
-            </c:if>
-            
-            <!-- 관리자일 때 삭제 가능, 관리자 ID : admin -->
-            <c:if test="${sessionScope.userId=='admin'}">
-            <input type="submit" id="modifyButton" value="수정" formaction="${pageContext.request.contextPath}/boardModify.mvc"/>
-            <input type="submit" id="deleteButton" value="삭제" formaction="${pageContext.request.contextPath}/boardDelete.mvc"/>
-            </c:if>
+    <div class="header_img"></div>
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="main.mvc">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="boardList.mvc">공지사항</a></li>
+        </ol>
+    </nav>
+    <div id="input">
+        <section>
+            <div id="inside">
+                <form method="post">
+                    <fieldset id="titleField">
+                        <legend>
+                            <h3>
+                               	 글 번호 : <input type="text" id="input" name="bnum" value="${board.bnum}" readonly="readonly" style="width: 100pt; border:none; margin-right: 500px ">
+                                <div style="float: right;">
+                                 조회수 : ${board.cnt}<%--  작성날짜: ${board.bdate} --%>
+                                 </div>
+                            </h3>
+                        </legend>
+                        <legend>
+                            <h3>
+                               	 제목  : <input type="text" id="input" name="title" value="${board.title}" style="width: 350pt; border: none; ">
+                                <div style="float: right;">
+                              	  작성자  : <input type="text" id="input" name="id" value="${userId }" readonly="readonly" style="text-align:right; width: 120pt; border: none; ">
+                                </div>
+                            </h3>
+                        </legend>
+                    </fieldset>
+                    <h3>Content</h3>
+                    <textarea rows="30" cols="50" name="content" id="textField" style="font-size: large;">${board.content}</textarea>
+                    <br>
+                    <div id="buttondiv">
+                        <input class="btn btn-success" type="button" id="checkButton" value="확인" onclick="location.href='${pageContext.request.contextPath}/boardList.mvc'" />
+                        <c:if test="${sessionScope.userId eq board.id}">
+                            <c:if test="${sessionScope.userId!='admin'}">
+                                <input class="btn btn-warning" type="submit" id="modifyButton" value="수정" formaction="${pageContext.request.contextPath}/boardModify.mvc" />
+                                <input class="btn btn-danger" type="submit" id="deleteButton" value="삭제" formaction="${pageContext.request.contextPath}/boardDelete.mvc" />
+                            </c:if>
+                        </c:if>
+                        <!-- 관리자일 때 삭제 가능, 관리자 ID : admin -->
+                        <c:if test="${sessionScope.userId=='admin'}">
+                            <input class="btn btn-warning" type="submit" id="modifyButton" value="수정" formaction="${pageContext.request.contextPath}/boardModify.mvc" />
+                            <input class="btn btn-danger" type="submit" id="deleteButton" value="삭제" formaction="${pageContext.request.contextPath}/boardDelete.mvc" />
+                        </c:if>
+                    </div>
+                </form>
             </div>
-        </form>
-    </section>
-    </table>
+        </section>
     </div>
-    
-<%@ include file="/WEB-INF/view/bottom.jsp" %>
+    <%@ include file="/WEB-INF/view/bottom.jsp" %>
 </body>
 </html>

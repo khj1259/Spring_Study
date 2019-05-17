@@ -12,60 +12,30 @@
 <!-- vue, axios -->
 <script src="https://unpkg.com/vue"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-<title>QnA 게시판</title>
+<title>공지사항 게시판</title>
 </head>
 <style type="text/css">
-.darkbox {
-	background-color: white;
-	color: gray;
-	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-
-.darkbox table {
-	margin: 0 auto;
-}
-.darkbox select{
-	width: 100px;
-	height: 35px;
-	color: black;
-}
-.darkbox input{
-	
-}
-
-.darkbox table td {
-	text-align: left;
-	padding-left: 5px;
-	padding-right: 5px;
-	/* color: #999999 */
-}
-
-.darkbox table button {
-	background-color: #0099ff;
-	color: white;
-	border-radius: 3px;
-	width: 60px;
-}
-
 #writeBt{
 	display: block;
 	margin: 0 auto;
 	width: 80px;
 }
 #board{
-	width: 80%;
+	width: 60%;
 	margin: 0 auto;
 }
-table, th{
+#board table, th{
 	text-align: center;
 }
-th:nth-child(2) {
+#board th:nth-child(2) {
 	width: 60%;
 }
-th:nth-child(4) {
+#board th:nth-child(4) {
 	width: 10%;
+}
+#board thead{
+	background-color: #EAEAEA;
+	border-top: 1px black solid;
 }
 .header_img{
 	width: 100%;
@@ -78,9 +48,7 @@ th:nth-child(4) {
 </style>
 <body>
 <%@include file="topmenu.jsp" %>
-	<div class="header_img">
-	
-	</div>
+	<div class="header_img"></div>
 	<nav aria-label="breadcrumb" role="navigation">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="main.mvc">Home</a></li>
@@ -100,7 +68,7 @@ th:nth-child(4) {
                             <div class="input-group col-md-12">
                                 <input type="text"
 									name="searchBoardValue" class=" search-query form-control"
-									placeholder="Search" />
+									placeholder="공지사항 검색" />
                                 <span class="input-group-btn">
                                     <button class="btn btn-danger"
 										id="search" type="submit">
@@ -119,8 +87,10 @@ th:nth-child(4) {
 	</div>
 
 	<!-- contents -->
-	
+	<br>
 	<div id="board">
+		<h1>공지사항</h1>
+		<br>
 		<div v-if="errored">Error In AJAX Transport</div>
 		<div v-else>
 			<table class="table table-hover">

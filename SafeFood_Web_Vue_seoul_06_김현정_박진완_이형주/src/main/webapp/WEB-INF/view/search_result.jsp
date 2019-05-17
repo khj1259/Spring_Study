@@ -13,39 +13,6 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style type="text/css">
-.darkbox {
-	background-color: white;
-	color: gray;
-	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-
-.darkbox table {
-	margin: 0 auto;
-}
-.darkbox select{
-	width: 100px;
-	height: 35px;
-	color: black;
-}
-.darkbox input{
-	
-}
-
-.darkbox table td {
-	text-align: left;
-	padding-left: 5px;
-	padding-right: 5px;
-	/* color: #999999 */
-}
-
-.darkbox table button {
-	background-color: #0099ff;
-	color: white;
-	border-radius: 3px;
-	width: 60px;
-}
 
 .contents img {
 	width: 200px;
@@ -70,6 +37,14 @@ nav ul a {
 .contents{
 	width: 80%;
 	margin: 0 auto;
+}
+.header_img{
+	width: 100%;
+	height: 242px;
+	background-image: url("img/배경1.PNG");
+	background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 </style>
 <script type="text/javascript">
@@ -111,11 +86,11 @@ $(function () {
 </head>
 <body>
 	<%@include file="topmenu.jsp" %>
-<img alt=".." src="img/배경1.PNG">
+	<div class="header_img"></div>
 	<nav aria-label="breadcrumb" role="navigation">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="main.mvc">Home</a></li>
-			<li class="breadcrumb-item active" aria-current="page">검색결과</li>
+			<li class="breadcrumb-item active" aria-current="page">상품정보</li>
 		</ol>
 	</nav>
 	<div class="darkbox">

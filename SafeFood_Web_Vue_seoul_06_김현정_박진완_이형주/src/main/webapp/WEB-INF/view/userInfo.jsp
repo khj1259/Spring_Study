@@ -24,82 +24,34 @@
 }
 form {
 	padding: 50px;
+	padding-top: 0;
+	padding-bottom: 20px;
 }
-.graybox {
-	background-color: gray;
-	color: white;
+.header_img{
 	width: 100%;
+	height: 242px;
+	background-image: url("img/배경6-2.PNG");
+	background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.btns{
 	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-	margin-top: 10px;
-}
-
-.darkbox {
-	background-color: #4d4d4d;
-	color: gray;
-	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-
-.darkbox table {
-	margin: 0 auto;
-}
-
-.darkbox table tr input, table select {
-	border-radius: 3px;
-	background-color: gray;
-}
-
-.darkbox table td {
-	text-align: left;
-	padding-left: 5px;
-	padding-right: 5px;
-	color: #999999
-}
-
-.darkbox table button {
-	background-color: #0099ff;
-	color: white;
-	border-radius: 3px;
-	width: 60px;
-}
-.darkbox input, select{
-	color: white;
+	margin-top: 50px;
 }
 </style>
 </head>
 <body>
 <%@include file="topmenu.jsp" %>
-	<div class="graybox">
-		<h3>WHAT WE PROVIDE</h3>
-		<h5>건강한 삶을 위한 먹거리 프로젝트</h5>
-	</div>
-	<div class="darkbox">
-		<table>
-			<tr>
-				<td>검색조건</td>
-				<td>검색단어</td>
-				<td>&nbsp</td>
-			</tr>
-			<tr>
-				<td><select name="search_opt">
-						<option value="name">상품명</option>
-				</select></td>
-				<td><input type="text"></td>
-				<td><button>검색</button></td>
-			</tr>
-		</table>
-	</div>
-	<!-- contents -->
+<div class="header_img"></div>
 	<nav aria-label="breadcrumb" role="navigation">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="main.mvc">Home</a></li>
 			<li class="breadcrumb-item active" aria-current="page">회원 정보</li>
 		</ol>
 	</nav>
-	<div class="back">
+	<br>
+	<!-- contents -->
 		<div class="container contents">
 			<h2>회원 정보</h2>
 			<br>
@@ -197,22 +149,17 @@ form {
 						</fieldset>
 					</div>
 				</div>
-				
-				
 				<br>
+	<h3>추가 정보(선택사항)<span style="color: red">&nbsp;*</span></h3>
 				<br>
-				<h3>
-				추가 정보(선택사항)<span style="color: red">&nbsp;*</span></label>
-				</h3>
 				<div class="form-group row">
 					<label for="gender" class="col-sm-2 col-form-label">성별<span
 						style="color: red">&nbsp;</span></label>
-
 					<div class="col-sm-10">
-					
 						<span>${UserPrivateInfo.getGender()}</span>
 					</div>
 				</div>
+
 
 				<div class="form-group row">
 					<label for="height" class="col-sm-2 col-form-label">키<span
@@ -247,25 +194,16 @@ form {
 					</div>
 				</div>
 				
-				
-				<div class="form-group row">
-					<div class="col-sm-2"></div>
-					<div class="col-sm-2">
-						<a class="btn btn-primary" href="userOutReady.mvc" role="button">회원
-							탈퇴</a>
-					</div>
-					<div class="col-sm-2">
+				<br>
+				<div class="btns">
 						<a class="btn btn-primary" href="userInfoEdit.mvc" role="button">정보
 							수정</a>
-					</div>
-					<div class="col-sm-2">
-						<a class="btn btn-info" href="eatFoodList.mvc" role="button">
+						<a class="btn btn-danger" href="userOutReady.mvc" role="button">회원
+							탈퇴</a>
+						<a class="btn btn-success" href="eatFoodList.mvc" role="button">
 							섭취식품</a>
-					</div>
-					<!-- <div class="col-sm-2">
-						<a class="btn btn-info" href="#" role="button">
+						<a class="btn btn-info" href="wishList.mvc" role="button">
 							찜한 식품</a>
-					</div> -->
 				</div>
 			</form>
 		</div>

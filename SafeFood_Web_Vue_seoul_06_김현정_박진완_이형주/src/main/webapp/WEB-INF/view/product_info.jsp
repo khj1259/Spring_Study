@@ -18,54 +18,19 @@
 
 </head>
 <style type="text/css">
-.graybox {
-	background-color: gray;
-	color: white;
-	width: 100%;
-	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-	margin-top: 10px;
-}
-
-.darkbox {
-	background-color: #4d4d4d;
-	color: gray;
-	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-
-.darkbox table {
-	margin: 0 auto;
-}
-
-.darkbox table tr input, table select {
-	border-radius: 3px;
-	background-color: gray;
-}
-
-.darkbox table td {
-	text-align: left;
-	padding-left: 5px;
-	padding-right: 5px;
-	color: #999999
-}
-
-.darkbox table button {
-	background-color: #0099ff;
-	color: white;
-	border-radius: 3px;
-	width: 60px;
-}
-.darkbox input, select{
-	color: white;
-}
 .row{
 	margin-bottom: 15px;
 }
 th {
 	width: 75px;
+}
+.header_img{
+	width: 100%;
+	height: 242px;
+	background-image: url("img/배경1.PNG");
+	background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 </style>
 <script type="text/javascript">
@@ -146,18 +111,16 @@ th {
 </script>
 <body>
 	<%@include file="topmenu.jsp" %>
-	<div class="graybox">
-		<h3>WHAT WE PROVIDE</h3>
-		<h5>건강한 삶을 위한 먹거리 프로젝트</h5>
-	</div>
+	<div class="header_img"></div>
+	<nav aria-label="breadcrumb" role="navigation">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="main.mvc">Home</a></li>
+			<li class="breadcrumb-item"><a href="foodlist.mvc">상품정보</a></li>
+		</ol>
+	</nav>
 	<div class="darkbox">
 		<form action="search_result.mvc" method="get">
 			<table>
-				<tr>
-					<td>검색조건</td>
-					<td>검색단어</td>
-					<td>&nbsp</td>
-				</tr>
 				<tr>
 					<td>
 						<select name="search_opt">
@@ -166,18 +129,23 @@ th {
 							<option value="material">원재료</option>	
 						</select>
 					</td>
-					<td><input type="text" name="searchValue"></td>
-					<td><button id="search" type="submit">검색</button></td>
+					<td> <div id="custom-search-input">
+                            <div class="input-group col-md-12">
+                                <input type="text" name="searchValue" class=" search-query form-control" placeholder="Search" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger" id="search" type="submit">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+					<!-- <td><input type="text" name="searchValue"></td>
+					<td><button id="search" type="submit">검색</button></td> -->
 				</tr>
 			</table>
 		</form>
 	</div>
-	<nav aria-label="breadcrumb" role="navigation">
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="main.mvc">Home</a></li>
-			<li class="breadcrumb-item"><a href="foodlist.mvc">상품정보</a></li>
-		</ol>
-	</nav>
 	<div class="alert" style="display: none;">
 	 	<c:if test="${fn:length(contains) > 0 }">
 			<div class="alert alert-danger" role="alert">

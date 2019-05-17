@@ -14,40 +14,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <title>식품정보</title>
 <style type="text/css">
-.darkbox {
-	background-color: white;
-	color: gray;
-	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-
-.darkbox table {
-	margin: 0 auto;
-}
-.darkbox select{
-	width: 100px;
-	height: 35px;
-	color: black;
-}
-.darkbox input{
-	
-}
-
-.darkbox table td {
-	text-align: left;
-	padding-left: 5px;
-	padding-right: 5px;
-	/* color: #999999 */
-}
-
-.darkbox table button {
-	background-color: #0099ff;
-	color: white;
-	border-radius: 3px;
-	width: 60px;
-}
-
 .contents img {
 	width: 200px;
 	height: 200px;
@@ -69,9 +35,12 @@
 	margin: 0 auto;
 }
 .header_img{
-	width: 1903px;
+	width: 100%;
 	height: 242px;
 	background-image: url("img/배경1.PNG");
+	background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 </style>
 <script>	

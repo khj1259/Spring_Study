@@ -55,19 +55,8 @@ header img {
 	border-radius: 20px;
 	margin-top: 15px;
 }
-
-/* .graybox {
-	background-color: gray;
-	color: white;
-	width: 100%;
-	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-	margin-top: 10px;
-}
-
 .darkbox {
-	background-color: #4d4d4d;
+	background-color: white;
 	color: gray;
 	text-align: center;
 	padding-bottom: 10px;
@@ -77,19 +66,20 @@ header img {
 .darkbox table {
 	margin: 0 auto;
 }
-
-.darkbox table tr input, table select {
-	border-radius: 3px;
-	background-color: gray;
-	border: none;
-	height: 20px;
+.darkbox select{
+	width: 100px;
+	height: 35px;
+	color: black;
+}
+.darkbox input{
+	
 }
 
 .darkbox table td {
 	text-align: left;
 	padding-left: 5px;
 	padding-right: 5px;
-	color: #999999
+	/* color: #999999 */
 }
 
 .darkbox table button {
@@ -97,10 +87,10 @@ header img {
 	color: white;
 	border-radius: 3px;
 	width: 60px;
-	height: 20px;
-	border: none;
-} */
-
+}
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
 /* .container {
 	padding-top: 100px;
 } */
@@ -133,6 +123,13 @@ header img {
 } */
 nav ul a {
 	color: black;
+}
+.breadcrumb{
+	margin-bottom: 0;
+}
+.darkbox{
+	margin-bottom: 15px;
+	border-bottom: 1px solid #EAEAEA;
 }
 </style>
 <script type="text/javascript">
@@ -172,41 +169,43 @@ nav ul a {
 			<ul>
 			<a href="main.mvc"><img class="logo" alt="logo"
 				src="img/logo.png"></a>
-				<c:if test="${not empty user }">
-					<a href="wishList.mvc"><li class="info_eat">예상 섭취 정보</li></a>
-				</c:if>
-				<c:if test="${empty user }">
-					<li class="info_eat">예상 섭취 정보</li>
-				</c:if>
-				<li class="info_my">
-					<c:if test="${not empty user }">
-						<a href="eatFoodList.mvc">내 섭취정보</a>
+				<li class="info_eat">
+					<c:if test="${not empty sessionScope.user }">
+						<a href="wishList.mvc">예상 섭취 정보</a>
 					</c:if>
-					<c:if test="${empty user }">
+					<c:if test="${empty sessionScope.user }">
+						예상 섭취 정보
+					</c:if>
+				</li>
+				<li class="info_my">
+					<c:if test="${not empty sessionScope.user }">
+						<a href="eatFoodList.mvc">내 섭취 정보</a>
+					</c:if>
+					<c:if test="${empty sessionScope.user }">
 						내 섭취 정보
 					</c:if>
 				</li>
 				<li class="info_best"><a href="bestEatFood.mvc">베스트 섭취정보</a></li>
 				<li class="info_item">
-					<c:if test="${not empty user }">
+					<c:if test="${not empty sessionScope.user }">
 						<a href="foodlist.mvc">상품정보</a>
 					</c:if>
-					<c:if test="${empty user }">
+					<c:if test="${empty sessionScope.user }">
 						상품정보
 					</c:if>
 				</li>
 				<li class="announce">
-                <c:if test="${not empty user }">
+                <c:if test="${not empty sessionScope.user }">
                         <a href="boardList.mvc">공지사항</a>
                 </c:if>
-                <c:if test="${empty user }">
+                <c:if test="${empty sessionScope.user }">
                       		  공지사항
                 </c:if>    
                 </li>
 			</ul>
 			</div>
 			<ul>
-				<c:if test="${empty user }">
+				<c:if test="${empty sessionScope.user }">
 					<li>
 						<a href="#" id="signup">
 							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Sign up
@@ -252,45 +251,13 @@ nav ul a {
 						</div>
 					</div>
 				</c:if>
-				<c:if test="${not empty user }">
+				<c:if test="${not empty sessionScope.user }">
 					<li><a href="#" id="logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout</button></li>
 					<li><a href="#" id="userinfo"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;회원정보</button></li>
 				</c:if>
 			</ul>
 		</nav>
 	</header>
-	<%-- <div class="graybox">
-		<h3>WHAT WE PROVIDE</h3>
-		<h5>건강한 삶을 위한 먹거리 프로젝트</h5>
-	</div>
-	<div class="darkbox">
-		<form action="search_result.mvc" method="get">
-			<table>
-				<tr>
-					<td>검색조건</td>
-					<td>검색단어</td>
-					<td>&nbsp</td>
-				</tr>
-				<tr>
-					<td><select name="search_opt">
-							<option value="name">식품명</option>
-							<option value="maker">제조사</option>
-							<option value="material">원재료</option>
-					</select></td>
-					<td><input type="text" name="searchValue"></td>
-					
-					<c:if test="${not empty user }">
-					<td><button id="search" type="submit">검색</button></td>
-					</c:if>
-				
-					<c:if test="${empty user}">
-					<td><button id="test" type="reset" onclick="login()">검색</button></td>
-					</c:if>
-					
-				</tr>
-			</table>
-		</form>
-	</div> --%>
 
 </body>
 </html>

@@ -14,56 +14,28 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<title>예상섭취식품</title>
 <style type="text/css">
 .bono{
 	position:absolute;
 	float: left;
 	padding-right: 10px;
-	
 }
-.graybox {
-	background-color: gray;
-	color: white;
+.header_img{
 	width: 100%;
+	height: 242px;
+	background-image: url("img/배경4-1.PNG");
+	background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.item img{
+	height: 180px;
+	width: 200px;
+}
+.item{
 	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-	margin-top: 10px;
-}
-
-.darkbox {
-	background-color: #4d4d4d;
-	color: gray;
-	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-
-.darkbox table {
-	margin: 0 auto;
-}
-
-.darkbox table tr input, table select {
-	border-radius: 3px;
-	background-color: gray;
-}
-
-.darkbox table td {
-	text-align: left;
-	padding-left: 5px;
-	padding-right: 5px;
-	color: #999999
-}
-
-.darkbox table button {
-	background-color: #0099ff;
-	color: white;
-	border-radius: 3px;
-	width: 60px;
-}
-.darkbox input, select{
-	color: white;
+	padding-bottom: 20px;
 }
 </style>
 <script type="text/javascript">
@@ -101,83 +73,106 @@
 				});
 			}
 		});
+		//추가버튼 클릭 시
+		$('.btAdd').click(function() {
+			//$('.alert').show();
+			var code =  $(this).val();
+			var wishcode = $(this).prev().val();
+			console.log(wishcode);
+			var cnt = $(this).parents().prev().val();
+			if(cnt != null){
+				$.ajax({
+					url:"eatFoodAdd.mvc",
+					type:"POST",
+					data:"code="+code+"&cnt="+cnt,
+					success:function(){
+						$.ajax({
+							url:"wishListDelete.mvc",
+							type:"POST",
+							data:{wishcode:wishcode},
+							success:function(){
+								window.location.reload();
+								alert('추가되었습니다');
+							}
+						});
+					}
+				});
+			}
+		});
 	});
 </script>
 </head>
 <body>
 <%@include file="topmenu.jsp" %>
-	<div class="graybox">
-		<h3>WHAT WE PROVIDE</h3>
-		<h5>건강한 삶을 위한 먹거리 프로젝트</h5>
-	</div>
-	<div class="darkbox">
-		<form action="search_result.mvc" method="get">
-			<table>
-				<tr>
-					<td>검색조건</td>
-					<td>검색단어</td>
-					<td>&nbsp</td>
-				</tr>
-				<tr>
-					<td><select name="search_opt">
-							<option value="name">식품명</option>
-							<option value="maker">제조사</option>
-							<option value="material">원재료</option>
-					</select></td>
-					<td><input type="text" name="searchValue"></td>
-					
-					<td><button id="search" type="submit">검색</button></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-	<!-- contents -->
-	<nav aria-label="breadcrumb" role="navigation">
+ 	<div class="blur header_img"></div>
+ 		<nav aria-label="breadcrumb" role="navigation">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="main.mvc">Home</a></li>
 			<li class="breadcrumb-item"><a href="userInfo.mvc">회원정보</a></li>
 			<li class="breadcrumb-item active" aria-current="page">예상섭취정보</li>
 		</ol>
 	</nav>
+   <div class="darkbox">
+		<form action="search_result.mvc" method="get">
+			<table>
+				<tr>
+					<td>
+						<select name="search_opt">
+							<option value="name">식품명</option>	
+							<option value="maker">제조사</option>	
+							<option value="material">원재료</option>	
+						</select>
+					</td>
+					<td> <div id="custom-search-input">
+                            <div class="input-group col-md-12">
+                                <input type="text" name="searchValue" class=" search-query form-control" placeholder="Search" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger" id="search" type="submit">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+					<!-- <td><input type="text" name="searchValue"></td>
+					<td><button id="search" type="submit">검색</button></td> -->
+				</tr>
+			</table>
+		</form>
+	</div>
+	<!-- contents -->
+
 	<div class="back">
 		<div class="container">
 			<fieldset>
-			<legend><h2>예상 섭취 식품<img src="img/bono.gif" width=150px height=150px></h2>
+			<legend><h2>예상 섭취 식품<!-- <img src="img/bono.gif" width=150px height=150px> --></h2>
 			<br>
 			<br>
 			</legend>
 			</fieldset>
 			
-		<c:forEach items="${list }" var="food" varStatus="idx">
-			<c:choose>
-				<c:when test="${idx.count mod 2 eq 1 }">
-					<div class="col-sm-6">
-						<div class="row item">
-							<div class="col-sm-3"><a href="searchFood.mvc?code=${food.code }" class="thumbnail"><img src="${food.img }"></a></div>
-							<h3>${food.name }</h3><h4>수량 : ${food.cnt}</h4>	
+			<fieldset>
+                <legend>
+            <c:forEach items="${list}" var="food" varStatus="idx">
+                        <div class="col-sm-2">
+                            <div class="item">
+                                <div>
+                                    <a href="searchFood.mvc?code=${food.code }" class="thumbnail"><img
+                                        src="${food.img }"></a>
+                                </div>
+                                <h4>${food.name }</h4>
+                                <h4>수량 : ${food.cnt}</h4>
+                                <input type="text" value="${food.cnt}" style="display: none;" >
 								<div class="btn-group" role="group">
 									<button type="button" class="btn btn-primary delBt" value="${food.wishcode }">삭제</button>
-									<button type="button" class="btn btn-primary updateBt" value="${food.wishcode }">수정</button><br>
+									<button type="button" class="btn btn-primary updateBt" value="${food.wishcode }">수정</button>
+									<button type="button" class="btn btn-primary btAdd" value="${food.code }">추가</button>
 								</div>
-						</div>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="row">
-						<div class="col-sm-6">
-						<div class="row item">
-							<div class="col-sm-3"><a href="searchFood.mvc?code=${food.code }" class="thumbnail"><img src="${food.img }"></a></div>
-							<h3>${food.name }</h3><h4>수량 : ${food.cnt}</h4>	
-								<div class="btn-group" role="group">
-									<button type="button" class="btn btn-primary delBt" value="${food.wishcode }">삭제</button>
-									<button type="button" class="btn btn-primary updateBt" value="${food.wishcode }">수정</button><br>
-								</div>
-						</div>
-					</div>
-				</div>		
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
+							</div>
+                        </div>
+            </c:forEach>
+                  </legend>
+            </fieldset>
 	</div>
 	</div>
 	<!-- contents end -->

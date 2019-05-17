@@ -13,6 +13,15 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
+
+<script type="text/javascript">
+	if('${flag2}' == 1){
+	console.log("중복된 아이디");
+	alert('중복된 아이디입니다.');
+	location.href = 'signup.mvc';
+}
+
+</script>
 <style type="text/css">
 .contents {
 	width: 50%;
@@ -24,70 +33,44 @@
 form {
 	padding: 50px;
 }
-.graybox {
-	background-color: gray;
-	color: white;
+.header_img{
 	width: 100%;
-	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-	margin-top: 10px;
+	height: 242px;
+	background-image: url("img/배경6-1.PNG");
+	background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+	/* text-align: center; */
+	/*  filter:blur(2px);    */
 }
+/* .header_img h3{
+	height: 185px;
+   padding-top: 70px;
+    color: #fff;
+    font-size: 50px;
+    font-weight: 550;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: font-family: 'Noto Sans KR', sans-serif;
+}
+.header_img h3 span{
+	display: block;
+    margin-top: 15px;
+    font-size: 24px;
+    font-weight: 400;
+}  */
 
-.darkbox {
-	background-color: #4d4d4d;
-	color: gray;
-	text-align: center;
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-
-.darkbox table {
-	margin: 0 auto;
-}
-
-.darkbox table tr input, table select {
-	border-radius: 3px;
-	background-color: gray;
-}
-
-.darkbox table td {
-	text-align: left;
-	padding-left: 5px;
-	padding-right: 5px;
-	color: #999999
-}
-
-.darkbox table button {
-	background-color: #0099ff;
-	color: white;
-	border-radius: 3px;
-	width: 60px;
-}
 </style>
 </head>
 <body>
 <%@include file="topmenu.jsp" %>
-	<div class="graybox">
-		<h3>WHAT WE PROVIDE</h3>
-		<h5>건강한 삶을 위한 먹거리 프로젝트</h5>
-	</div>
-	<div class="darkbox">
-		<table>
-			<tr>
-				<td>검색조건</td>
-				<td>검색단어</td>
-				<td>&nbsp</td>
-			</tr>
-			<tr>
-				<td><select name="search_opt">
-						<option value="name">상품명</option>
-				</select></td>
-				<td><input type="text"></td>
-				<td><button>검색</button></td>
-			</tr>
-		</table>
-	</div>
+<div class="header_img">
+	<!-- <h3>회원정보
+	<span>소중한 고객님의 회원정보 입니다.</span>
+	</h3> -->
+</div>
 	<!-- contents -->
 	<nav aria-label="breadcrumb" role="navigation">
 		<ol class="breadcrumb">
@@ -95,7 +78,7 @@ form {
 			<li class="breadcrumb-item active" aria-current="page">회원가입</li>
 		</ol>
 	</nav>
-	<div class="back">
+	<br>
 		<div class="container contents">
 			<h2>회원가입</h2>
 			<br>
@@ -207,7 +190,7 @@ form {
 				<br>
 				<br>
 				<h3>
-				추가 정보(선택사항)<span style="color: red">&nbsp;*</span></label>
+				추가 정보(선택사항)
 				</h3>
 				<div class="form-group row">
 					<label for="gender" class="col-sm-2 col-form-label">성별<span
@@ -256,8 +239,6 @@ form {
 							type="radio" name="checkActivity" value="매우활동적">매우활동적
 					</div>
 				</div>
-
-
 
 				<div class="form-group row">
 					<div class="col-sm-2"></div>

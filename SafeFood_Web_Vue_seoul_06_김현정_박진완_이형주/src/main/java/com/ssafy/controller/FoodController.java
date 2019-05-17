@@ -185,7 +185,7 @@ public class FoodController {
     
     
     
-	//내 섭취식품 리스트 조회
+  //내 섭취식품 리스트 조회
     @RequestMapping("eatFoodList.mvc")
     public String eatFoodList(HttpServletRequest req, Model model) {
     	HttpSession session = req.getSession();
@@ -202,17 +202,27 @@ public class FoodController {
 			model.addAttribute("list", list);
 				int cal = 0;
 		        int nat = 0;
+		        int carbo = 0;
+		        int protein = 0;
+		        int fat = 0;
 		        for(MyEatFood m: list) {
 		            int code = m.getCode();
 		            int cnt = m.getCnt();
 		            cal += cnt*fService.getCal(code);
 		            nat += cnt*fService.getNat(code);
+		            carbo += cnt*fService.getCarbo(code);
+		            protein += cnt*fService.getProtein(code);
+		            fat+= cnt*fService.getFat(code);
 		            System.out.println(nat);
 		        }
 		        
 		        model.addAttribute("cal",cal);
 		        model.addAttribute("nat",nat);
 		        model.addAttribute("kcal","-1");
+		        model.addAttribute("carbo",carbo);
+		        model.addAttribute("protein",protein);
+		        model.addAttribute("fat",fat);
+		        
 			return "eatFoodList";
 		}else {
 		
@@ -278,18 +288,25 @@ public class FoodController {
 		model.addAttribute("list", list);
 		 	int cal = 0;
 	        int nat = 0;
+	        int carbo=0;
+	        int protein=0;
+	        int fat=0;
+	        
 	        for(MyEatFood m: list) {
 	            int code = m.getCode();
 	            int cnt = m.getCnt();
 	            cal += cnt*fService.getCal(code);
 	            nat += cnt*fService.getNat(code);
-	            System.out.println(nat);
+	            carbo += cnt*fService.getCarbo(code);
+	            protein += cnt*fService.getProtein(code);
+	            fat+= cnt*fService.getFat(code);
 	        }
-	        
 	        model.addAttribute("cal",cal);
 	        model.addAttribute("nat",nat);
+	        model.addAttribute("carbo",carbo);
+	        model.addAttribute("protein",protein);
+	        model.addAttribute("fat",fat);
 	        return "eatFoodList";
 		}
-		
     }
 }

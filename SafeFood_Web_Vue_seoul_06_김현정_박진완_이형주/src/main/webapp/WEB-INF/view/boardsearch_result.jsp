@@ -16,47 +16,9 @@
 <script src="https://unpkg.com/vue"></script>
 <script
     src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-<title>QnA 게시판</title>
+<title>공지사항 게시판</title>
 </head>
 <style type="text/css">
-.graybox {
-    background-color: gray;
-    color: white;
-    width: 100%;
-    text-align: center;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    margin-top: 10px;
-}
-.darkbox {
-    background-color: #4d4d4d;
-    color: gray;
-    text-align: center;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-.darkbox table {
-    margin: 0 auto;
-}
-.darkbox table tr input, table select {
-    border-radius: 3px;
-    background-color: gray;
-}
-.darkbox table td {
-    text-align: left;
-    padding-left: 5px;
-    padding-right: 5px;
-    color: #999999
-}
-.darkbox table button {
-    background-color: #0099ff;
-    color: white;
-    border-radius: 3px;
-    width: 60px;
-}
-.darkbox input, select {
-    color: white;
-}
 #writeBt {
     display: block;
     margin: 0 auto;
@@ -75,38 +37,54 @@ th:nth-child(2) {
 th:nth-child(4) {
     width: 10%;
 }
+.header_img{
+	width: 100%;
+	height: 242px;
+	background-image: url("img/배경2.PNG");
+	background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 </style>
 <body>
     <%@include file="topmenu.jsp" %>
-    <div class="graybox">
-        <h3>WHAT WE PROVIDE</h3>
-        <h5>건강한 삶을 위한 먹거리 프로젝트</h5>
-    </div>
+    <div class="header_img"></div>
+    <nav aria-label="breadcrumb" role="navigation">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="main.mvc">Home</a></li>
+			<li class="breadcrumb-item active" aria-current="page">공지사항</li>
+		</ol>
+	</nav>
     <div class="darkbox">
-        <form action="search_boardresult.mvc" method="get">
-            <table>
-                <tr>
-                    <td>검색조건</td>
-                    <td>검색단어</td>
-                    <td>&nbsp</td>
-                </tr>
-                <tr>
-                    <td><select name="search_opt">
-                            <option value="title">제목</option>
-                            <option value="author">작성자</option>
-                    </select></td>
-                    <td><input type="text" name="searchBoardValue"></td>
-                    <td><button id="search" type="submit">검색</button></td>
+		<form action="search_boardresult.mvc" method="get">
+			<table>
+				<tr>
+					<td><select name="search_opt">
+							<option value="title">제목</option>
+							<option value="author">작성자</option>
+					</select></td>
+					<td><td>
+						<div id="custom-search-input">
+                            <div class="input-group col-md-12">
+                                <input type="text"
+									name="searchBoardValue" class=" search-query form-control"
+									placeholder="공지사항 검색" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger"
+										id="search" type="submit">
+                                        <span
+											class=" glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+                    </td>
+					
                 </tr>
             </table>
         </form>
-    </div>
-    <nav aria-label="breadcrumb" role="navigation">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="main.mvc">Home</a></li>
-            <li class="breadcrumb-item active"><a href="boardList.mvc">전체보기</a></li>
-        </ol>
-    </nav>
+	</div>
     <!-- contents -->
     <div id="board">
         <table class="table table-hover">

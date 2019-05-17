@@ -28,6 +28,11 @@
 		SELECT * FROM user WHERE id=#{id} AND name=#{name}
 	</select>
 	
+	
+	<select id="searchID" resultType="User" parameterType="String">
+		SELECT * FROM user WHERE id=#{id}
+	</select>
+	
 	<update id="modify" parameterType="User">
         UPDATE user SET password=#{password}, name=#{name}, address=#{address},phone=#{phone},allergy=#{allergy} WHERE id=#{id}
     </update>
